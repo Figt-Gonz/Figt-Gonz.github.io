@@ -1,0 +1,5 @@
+
+User-agent: *
+Allow: /
+
+Sitemap: https://figt-gonz.github.io/sitemap-index.xml

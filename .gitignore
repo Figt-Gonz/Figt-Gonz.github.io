@@ -1,5 +1,5 @@
-# build output
-dist/
+# build output is checked in for GitHub Pages deployment
+# dist/
 
 # generated types
 .astro/
