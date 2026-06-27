@@ -34,7 +34,7 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install --fetch-retries=3 --fetch-timeout=60000
 
       - name: Build
         run: npm run build
