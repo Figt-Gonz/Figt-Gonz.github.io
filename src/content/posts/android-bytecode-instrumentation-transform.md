@@ -1,7 +1,7 @@
 ---
 title: "Gradle 字节码插桩前置知识（二）：Transform 与 AGP 8 插桩 API"
 description: "介绍 Android Gradle 代码插桩中的 Transform API 以及 AGP 8 之后的 Instrumentation API 替代方案，说明如何把 ASM 插桩逻辑接入 Android 构建流程。"
-pubDatetime: 2026-06-28T20:20:00+08:00
+pubDatetime: 2026-06-28T18:05:00+08:00
 featured: false
 draft: false
 tags:
