@@ -22,18 +22,22 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 22.12.0
+          node-version: 24
+          cache: pnpm
 
       - name: Install dependencies
-        run: |
-          npm install -g npm@10.9.2
-          npm ci --no-audit --no-fund
+        run: pnpm install --no-frozen-lockfile
 
       - name: Build
-        run: npm run build
+        run: pnpm run build
 
       - name: Publish to gh-pages
         uses: peaceiris/actions-gh-pages@v4
