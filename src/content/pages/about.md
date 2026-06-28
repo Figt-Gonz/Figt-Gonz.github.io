@@ -8,7 +8,6 @@ description: "关于心游和这个技术博客。"
 目前主要关注：
 
 - Android 客户端工程
-- Kotlin / Compose
 - Gradle 与工程效率
 - AI 工具与研发工作流
 - 个人知识管理与技术内容创作
