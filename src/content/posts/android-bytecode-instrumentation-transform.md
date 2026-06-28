@@ -1,7 +1,7 @@
 ---
 title: "Gradle 字节码插桩前置知识（二）：Transform 与 AGP 8 插桩 API"
 description: "介绍 Android Gradle 代码插桩中的 Transform API 以及 AGP 8 之后的 Instrumentation API 替代方案，说明如何把 ASM 插桩逻辑接入 Android 构建流程。"
-pubDatetime: 2026-06-28T18:05:00+08:00
+pubDatetime: 2023-12-04T19:34:00+08:00
 featured: false
 draft: false
 tags:
@@ -37,7 +37,7 @@ tags:
 
 Transform 作用的位置：
 
-> 配图占位：`image-2023-12-4_22-8-19.png`（原文档中的本地图片未随 Markdown 一起上传，后续可补充到博客资源目录。）
+![image-2023-12-4_22-8-19.png](./android-bytecode-instrumentation-transform/images/image-2023-12-4_22-8-19.png)
 Transform 在 AGP 1.5 引入，用来在 app 构建过程中对 class、jar、资源文件做中间操作的 API。比如我们可以通过 ASM 去做字节码的插桩，Google 官方对 Transform 的一个典型应用就是 R8 工具，来对代码进行 desugar、混淆、压缩等操作。
 
 AGP 8 之后 Transform 由于效率问题被废弃，Google 官方提供了两套 API 来替代 Transform API 的功能。
