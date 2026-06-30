@@ -101,22 +101,16 @@ const rssHref = getRelativeLocaleUrl(
     -->
     <script is:inline>
       (function () {
-        const THEME_KEY = "theme";
-        const SYSTEM = "system";
-        const LIGHT = "light";
-        const DARK = "dark";
-        const stored = localStorage.getItem(THEME_KEY);
-        const mode = [SYSTEM, LIGHT, DARK].includes(stored) ? stored : SYSTEM;
+        const stored = localStorage.getItem("theme");
         const prefersDark = window.matchMedia(
           "(prefers-color-scheme: dark)"
         ).matches;
-        const theme = mode === SYSTEM ? (prefersDark ? DARK : LIGHT) : mode;
+        const theme = stored ?? (prefersDark ? "dark" : "light");
         const root = document.firstElementChild;
         root?.setAttribute("data-theme", theme);
-        root?.setAttribute("data-theme-mode", mode);
-        root?.classList.toggle("dark", theme === DARK);
-        // Expose values so theme.ts can skip re-detection.
-        window.__theme = { mode, value: theme };
+        root?.classList.toggle("dark", theme === "dark");
+        // Expose value so theme.ts can skip re-detection.
+        window.__theme = { value: theme };
       })();
     </script>
 
