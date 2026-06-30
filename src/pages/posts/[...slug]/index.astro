@@ -113,11 +113,11 @@ const ogImage = ogImageUrl
 
   <BackButton />
 
-  <div class="mx-auto grid w-full max-w-6xl grid-cols-1 gap-8 px-4 xl:grid-cols-[minmax(0,48rem)_16rem]">
+  <div class="relative mx-auto w-full max-w-app px-4">
     <main
       id="main-content"
       class:list={[
-        "mx-auto w-full max-w-app min-w-0",
+        "w-full min-w-0",
         { "mt-8": !config.features.showBackButton },
       ]}
       data-pagefind-body
@@ -175,10 +175,10 @@ const ogImage = ogImageUrl
       hasToc && (
         <aside
           aria-label="文章目录"
-          class="hidden xl:sticky xl:top-24 xl:block xl:max-h-[calc(100vh-7rem)] xl:self-start xl:overflow-y-auto"
+          class="hidden xl:fixed xl:top-24 xl:left-[calc(50%+25rem)] xl:block xl:max-h-[calc(100vh-7rem)] xl:w-56 xl:overflow-y-auto 2xl:left-[calc(50%+27rem)]"
           data-post-toc
         >
-          <nav class="ps-4 text-sm">
+          <nav class="text-sm">
             <h2 class="text-muted-foreground mb-3 text-xs font-semibold tracking-wide">
               目录
             </h2>
