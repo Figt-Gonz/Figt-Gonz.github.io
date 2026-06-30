@@ -2,18 +2,28 @@ const THEME_KEY = "theme";
 const LIGHT = "light";
 const DARK = "dark";
 
-function getPreferredTheme(): string {
+type ThemeValue = typeof LIGHT | typeof DARK;
+
+function isThemeValue(value: string | null | undefined): value is ThemeValue {
+  return value === LIGHT || value === DARK;
+}
+
+function getPreferredTheme(): ThemeValue {
   const stored = localStorage.getItem(THEME_KEY);
-  if (stored) return stored;
+  if (isThemeValue(stored)) return stored;
+  if (stored !== null) localStorage.removeItem(THEME_KEY);
+
   return window.matchMedia("(prefers-color-scheme: dark)").matches
     ? DARK
     : LIGHT;
 }
 
 // Reuse the value already set by the inline FOUC-prevention script if available.
-let themeValue: string =
-  (window as unknown as { __theme?: { value: string } }).__theme?.value ??
-  getPreferredTheme();
+const initialTheme = (window as unknown as { __theme?: { value: string } })
+  .__theme?.value;
+let themeValue: ThemeValue = isThemeValue(initialTheme)
+  ? initialTheme
+  : getPreferredTheme();
 
 function persist(): void {
   localStorage.setItem(THEME_KEY, themeValue);
@@ -47,23 +57,21 @@ setup();
 // Re-run after View Transitions navigation.
 document.addEventListener("astro:after-swap", setup);
 
-// Carry the theme-color value across View Transitions to prevent the
-// Android navigation bar from flashing during page transitions.
+// Carry theme state across View Transitions so the new document does not
+// briefly fall back to the default light theme during page transitions.
 document.addEventListener("astro:before-swap", event => {
+  const newDocument = (event as { newDocument: Document }).newDocument;
+  const newRoot = newDocument.firstElementChild;
+
+  newRoot?.setAttribute("data-theme", themeValue);
+  newRoot?.classList.toggle("dark", themeValue === DARK);
+
   const color = document
     .querySelector("meta[name='theme-color']")
     ?.getAttribute("content");
   if (color) {
-    (event as { newDocument: Document }).newDocument
+    newDocument
       .querySelector("meta[name='theme-color']")
       ?.setAttribute("content", color);
   }
 });
-
-// Sync with OS-level dark/light preference changes.
-window
-  .matchMedia("(prefers-color-scheme: dark)")
-  .addEventListener("change", ({ matches }) => {
-    themeValue = matches ? DARK : LIGHT;
-    persist();
-  });

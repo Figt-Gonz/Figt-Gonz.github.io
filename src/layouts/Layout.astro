@@ -102,10 +102,14 @@ const rssHref = getRelativeLocaleUrl(
     <script is:inline>
       (function () {
         const stored = localStorage.getItem("theme");
+        const isTheme = value => value === "light" || value === "dark";
+        if (stored !== null && !isTheme(stored)) {
+          localStorage.removeItem("theme");
+        }
         const prefersDark = window.matchMedia(
           "(prefers-color-scheme: dark)"
         ).matches;
-        const theme = stored ?? (prefersDark ? "dark" : "light");
+        const theme = isTheme(stored) ? stored : prefersDark ? "dark" : "light";
         const root = document.firstElementChild;
         root?.setAttribute("data-theme", theme);
         root?.classList.toggle("dark", theme === "dark");
