@@ -229,8 +229,7 @@
 <p>如果包名变动/类移动位置，需同步修改加载的 so 库名称，如果不对应则崩溃：</p>
 <p><img alt="image-2025-3-12_20-30-3.png" loading="lazy" decoding="async" width="1432" height="656" src="/_astro/image-2025-3-12_20-30-3.B-24sZ_Q_2qckK5.webp" srcset=""></p>
 <p><img alt="image-2025-3-12_20-30-25.png" loading="lazy" decoding="async" width="1020" height="791" src="/_astro/image-2025-3-12_20-30-25.Cv0cF9cr_1hl196.webp" srcset=""></p>
-<p>这点不利于后期维护，不灵活。**</p>
-<p>**</p>
+<p><strong>这点不利于后期维护，不灵活。</strong></p>
 </li>
 <li>
 <p><strong>包间禁止循环 import</strong></p>
@@ -256,8 +255,8 @@
 <p><img alt="image-2025-3-24_20-44-11.png" loading="lazy" decoding="async" width="1920" height="919" src="/_astro/image-2025-3-24_20-44-11.DoTNugWv_Z16lKlH.webp" srcset=""></p>
 </li>
 <li>
-<p>**仓颉侧调用 ArkTS 代码不便</p>
-<p>**仓颉侧不支持复用 ArkTS UI 资产。</p>
+<p><strong>仓颉侧调用 ArkTS 代码不便</strong></p>
+<p>仓颉侧不支持复用 ArkTS UI 资产。</p>
 <p>仓颉使用 ArkTS 逻辑的话，需要在 ArkTS 侧注册逻辑至仓颉侧，仓颉侧进行调用</p>
 <p>示例：
 第一步在仓颉侧编写互操作方法，提供给 ArkTS 侧进行逻辑注册</p>
@@ -269,20 +268,25 @@
 <p>仓颉要使用 ArkTS 侧逻辑，比较麻烦，不易维护。</p>
 </li>
 <li>
-<p>**开发体验上，比如包名修改、补全、自动引包等机制，不够完善，部分场景存在问题。文档等方面目前仍然不够完善，遇到问题不易查找资料解决。</p>
-<p>**</p>
+<p><strong>开发体验上，比如包名修改、补全、自动引包等机制，不够完善，部分场景存在问题。文档等方面目前仍然不够完善，遇到问题不易查找资料解决。</strong></p>
 </li>
 <li>
-<p>**与 ArkTS 互操作上，限制较多，编写不便</p>
-<p>**有 2 种互操作方式，互操作宏和互操作库，前者编写成本较低，后者编写成本较高。</p>
+<p><em>与 ArkTS 互操作上，限制较多，编写不便</em></p>
+<p>有 2 种互操作方式，互操作宏和互操作库，前者编写成本较低，后者编写成本较高。</p>
 <p>互操作宏编写示例：</p>
 <p><img alt="image-2025-3-17_21-19-18.png" loading="lazy" decoding="async" width="685" height="439" src="/_astro/image-2025-3-17_21-19-18.CaqjByNQ_16OrGd.webp" srcset=""></p>
 <p>此方式编写还是比较简单的，编写完即可在 ArkTS 侧调用，但也会存在一些限制，比如声明的方法不能传递非 @Interop 修饰的类型，此时需要使用互操作库的方式进行编写。</p>
 <p>互操作库编写示例，ArkTS 传递 context 给仓颉侧：</p>
-<p>\1. 通过互操作库声明函数
+<ol>
+<li>
+<p>通过互操作库声明函数
 <img alt="image-2025-3-12_21-20-6.png" loading="lazy" decoding="async" width="816" height="533" src="/_astro/image-2025-3-12_21-20-6.Bfumuk5a_jwui9.webp" srcset=""></p>
-<p>\2. ArkTS 中引入仓颉 so 库，进行调用
+</li>
+<li>
+<p>ArkTS 中引入仓颉 so 库，进行调用
 <img alt="image-2025-3-12_21-21-19.png" loading="lazy" decoding="async" width="829" height="119" src="/_astro/image-2025-3-12_21-21-19.DtCn7XzF_Z1XbSLX.webp" srcset=""></p>
+</li>
+</ol>
 <p>这种方式编写较繁琐，且出错不易排查，可维护性和可读性较差。</p>
 <p>分包场景下，会存在另一个问题：</p>
 <p>如果用互操作库编写互操作逻辑，只有第一次 requireCJLib() 时的 so 库才能使用对应方法，之后再次 requireCJLib() 就没法使用了，会崩溃，报 is not callable. 推测属于仓颉 bug。</p>
@@ -294,9 +298,11 @@
 </li>
 <li>
 <p><strong>兼容性问题</strong></p>
-<p>兼容性上，我们需要保证 2 点：
-\1. SDK 集成方使用，不会存在兼容性问题
-\2. 集成方编译后，在用户设备上运行，不会存在兼容性问题</p>
+<p>兼容性上，我们需要保证 2 点：</p>
+<ol>
+<li>SDK 集成方使用，不会存在兼容性问题</li>
+<li>集成方编译后，在用户设备上运行，不会存在兼容性问题</li>
+</ol>
 <p>实践过程中，发现第二点无法满足，使用 API 14 配套仓颉工具链，无法在低版本 API 设备上正常运行，如 API 12、API 13。
 （这点对于使用模拟器的开发者来说存在问题，因为仍使用低版本 API，但对于用户可能影响不大，因为华为方设备 API 升级比较频繁，大多数用户还是会升级的。但需要数据支持或华为方确认）</p>
 <p>而第一点则尚未进行验证。需进一步确认。</p>
@@ -332,15 +338,16 @@
 
 
 <table><thead><tr><th align="center">语言</th><th align="center">性能</th><th align="center">API 可用性 &#x26; 丰富度</th><th align="center">维护成本</th><th align="center">编码效率</th></tr></thead><tbody><tr><td align="center">ArkTS</td><td align="center">⭐⭐⭐</td><td align="center">⭐⭐⭐⭐⭐</td><td align="center">⭐⭐⭐⭐⭐</td><td align="center">⭐⭐⭐⭐⭐</td></tr><tr><td align="center">仓颉</td><td align="center">⭐⭐⭐⭐⭐</td><td align="center">⭐⭐⭐</td><td align="center">⭐⭐</td><td align="center">⭐⭐⭐</td></tr></tbody></table>
-<p>- 性能上，以其他厂商实践反馈以及官方宣传来看，仓颉是要优于 ArkTS 的，性能提升大约在 20%+</p>
-<p>- API 可用性及丰富度上，ArkTS 具有先发和主场优势。虽然仓颉中大部分 API 与 ArkTS 对齐，但仍有缺失</p>
-<p>- 维护成本上，仓颉目前 IDE 等开发工具链不够完善，可能还存在一些 bug，并且语法特性、互操作、工程配置等内容需要另外掌握学习，维护成本偏高</p>
-<p>- 编码效率上，仓颉仍然因为开发工具链成熟度、互操作编写等方面对效率存在影响，但并发编程上较 ArkTS 更简单易用</p>
+<ul>
+<li>性能上，以其他厂商实践反馈以及官方宣传来看，仓颉是要优于 ArkTS 的，性能提升大约在 20%+</li>
+<li>API 可用性及丰富度上，ArkTS 具有先发和主场优势。虽然仓颉中大部分 API 与 ArkTS 对齐，但仍有缺失</li>
+<li>维护成本上，仓颉目前 IDE 等开发工具链不够完善，可能还存在一些 bug，并且语法特性、互操作、工程配置等内容需要另外掌握学习，维护成本偏高</li>
+<li>编码效率上，仓颉仍然因为开发工具链成熟度、互操作编写等方面对效率存在影响，但并发编程上较 ArkTS 更简单易用</li>
+</ul>
 <h1 id="结论--展望">结论 &#x26; 展望</h1>
 <ol>
 <li>
-<p><strong>仓颉鸿蒙工具链尚不完善，引入会牺牲部分可维护性和编码的效率。建议优先使用 ArkTS 进行开发，在部分存在性能瓶颈的场景下，可以考虑小范围使用仓颉进行局部优化，以期待提升性能表现</strong>**</p>
-<p>**</p>
+<p><strong>仓颉鸿蒙工具链尚不完善，引入会牺牲部分可维护性和编码的效率。建议优先使用 ArkTS 进行开发，在部分存在性能瓶颈的场景下，可以考虑小范围使用仓颉进行局部优化，以期待提升性能表现</strong></p>
 </li>
 <li>
 <p><strong>期待仓颉在未来鸿蒙生态中有更多改进，工具链和使用层面能够进行优化、简化，以方便鸿蒙开发者推进仓颉应用落地</strong></p>
