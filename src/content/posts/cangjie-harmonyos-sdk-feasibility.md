@@ -1,5 +1,5 @@
 ---
-title: "仓颉语言实现鸿蒙 SDK 业务的可行性分析"
+title: "仓颉语言实现鸿蒙 SDK 业务的可行性调研"
 description: "基于鸿蒙业务 SDK 场景调研仓颉语言的开发方式、集成形态、现存问题、性能表现与落地可行性。"
 pubDatetime: 2025-03-12T19:00:00+08:00
 featured: false
