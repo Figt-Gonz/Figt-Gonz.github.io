@@ -1,6 +1,6 @@
 ---
-title: "我的第一篇博客"
-description: "用 GitHub Pages 和 AstroPaper 搭建个人技术博客，从这里开始长期记录。"
+title: "Welcome"
+description: "这是一个用 GitHub Pages 和 AstroPaper 搭建的个人技术博客，我将在这里进行长期记录。"
 pubDatetime: 2026-06-21T20:00:00+08:00
 featured: true
 draft: false
