@@ -1,0 +1,1093 @@
+<!DOCTYPE html><html dir="ltr" lang="zh-CN" class="overflow-y-scroll scroll-smooth"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" href="/favicon.ico"><link rel="canonical" href="https://figt-gonz.github.io/posts/design-patterns-notes/"><meta name="generator" content="Astro v6.4.8"><!-- Font --><style>@font-face{font-family:"Google Sans Code-1a30c214885cb404";src:url("/_astro/fonts/2213c1e7fbe06cc7.woff") format("woff"), url("/_astro/fonts/b87f789471b4c602.ttf") format("truetype");font-display:swap;font-weight:300;font-style:italic;}@font-face{font-family:"Google Sans Code-1a30c214885cb404";src:url("/_astro/fonts/c487dbd9c215141e.woff") format("woff"), url("/_astro/fonts/bb0c016d60298234.ttf") format("truetype");font-display:swap;font-weight:400;font-style:italic;}@font-face{font-family:"Google Sans Code-1a30c214885cb404";src:url("/_astro/fonts/0976c79a1e97c08d.woff") format("woff"), url("/_astro/fonts/b3e69a4f03324880.ttf") format("truetype");font-display:swap;font-weight:500;font-style:italic;}@font-face{font-family:"Google Sans Code-1a30c214885cb404";src:url("/_astro/fonts/3c46d5a1dde2929d.woff") format("woff"), url("/_astro/fonts/0ff1dfaf1dff21d0.ttf") format("truetype");font-display:swap;font-weight:600;font-style:italic;}@font-face{font-family:"Google Sans Code-1a30c214885cb404";src:url("/_astro/fonts/e9aa617e80052f4b.woff") format("woff"), url("/_astro/fonts/d9a5ad8b8018e5de.ttf") format("truetype");font-display:swap;font-weight:700;font-style:italic;}@font-face{font-family:"Google Sans Code-1a30c214885cb404";src:url("/_astro/fonts/5056f1a50e5e7744.woff") format("woff"), url("/_astro/fonts/3e4dac0d0220e48a.ttf") format("truetype");font-display:swap;font-weight:300;font-style:normal;}@font-face{font-family:"Google Sans Code-1a30c214885cb404";src:url("/_astro/fonts/e734307f8c328338.woff") format("woff"), url("/_astro/fonts/ba3036786bf88603.ttf") format("truetype");font-display:swap;font-weight:400;font-style:normal;}@font-face{font-family:"Google Sans Code-1a30c214885cb404";src:url("/_astro/fonts/dfa89044152f7da4.woff") format("woff"), url("/_astro/fonts/39aec4e7fc7cc077.ttf") format("truetype");font-display:swap;font-weight:500;font-style:normal;}@font-face{font-family:"Google Sans Code-1a30c214885cb404";src:url("/_astro/fonts/8bbd58b325585200.woff") format("woff"), url("/_astro/fonts/b33609507afd910d.ttf") format("truetype");font-display:swap;font-weight:600;font-style:normal;}@font-face{font-family:"Google Sans Code-1a30c214885cb404";src:url("/_astro/fonts/035035a9ddbd14aa.woff") format("woff"), url("/_astro/fonts/50fcf54bf575f53f.ttf") format("truetype");font-display:swap;font-weight:700;font-style:normal;}@font-face{font-family:"Google Sans Code-1a30c214885cb404 fallback: Courier New";src:local("Courier New");font-display:swap;font-weight:300;font-style:italic;size-adjust:99.9837%;ascent-override:96.6157%;descent-override:28.6047%;}@font-face{font-family:"Google Sans Code-1a30c214885cb404 fallback: Courier New";src:local("Courier New");font-display:swap;font-weight:400;font-style:italic;size-adjust:99.9837%;ascent-override:96.6157%;descent-override:28.6047%;}@font-face{font-family:"Google Sans Code-1a30c214885cb404 fallback: Courier New";src:local("Courier New");font-display:swap;font-weight:500;font-style:italic;size-adjust:99.9837%;ascent-override:96.6157%;descent-override:28.6047%;}@font-face{font-family:"Google Sans Code-1a30c214885cb404 fallback: Courier New";src:local("Courier New");font-display:swap;font-weight:600;font-style:italic;size-adjust:99.9837%;ascent-override:96.6157%;descent-override:28.6047%;}@font-face{font-family:"Google Sans Code-1a30c214885cb404 fallback: Courier New";src:local("Courier New");font-display:swap;font-weight:700;font-style:italic;size-adjust:99.9837%;ascent-override:96.6157%;descent-override:28.6047%;}@font-face{font-family:"Google Sans Code-1a30c214885cb404 fallback: Courier New";src:local("Courier New");font-display:swap;font-weight:300;font-style:normal;size-adjust:99.9837%;ascent-override:96.6157%;descent-override:28.6047%;}@font-face{font-family:"Google Sans Code-1a30c214885cb404 fallback: Courier New";src:local("Courier New");font-display:swap;font-weight:400;font-style:normal;size-adjust:99.9837%;ascent-override:96.6157%;descent-override:28.6047%;}@font-face{font-family:"Google Sans Code-1a30c214885cb404 fallback: Courier New";src:local("Courier New");font-display:swap;font-weight:500;font-style:normal;size-adjust:99.9837%;ascent-override:96.6157%;descent-override:28.6047%;}@font-face{font-family:"Google Sans Code-1a30c214885cb404 fallback: Courier New";src:local("Courier New");font-display:swap;font-weight:600;font-style:normal;size-adjust:99.9837%;ascent-override:96.6157%;descent-override:28.6047%;}@font-face{font-family:"Google Sans Code-1a30c214885cb404 fallback: Courier New";src:local("Courier New");font-display:swap;font-weight:700;font-style:normal;size-adjust:99.9837%;ascent-override:96.6157%;descent-override:28.6047%;}:root{--font-google-sans-code:"Google Sans Code-1a30c214885cb404","Google Sans Code-1a30c214885cb404 fallback: Courier New",monospace;}</style><!-- Primary meta --><title>设计模式学习笔记：从设计原则到 23 种模式 | 心游的技术博客</title><meta name="title" content="设计模式学习笔记：从设计原则到 23 种模式 | 心游的技术博客"><meta name="description" content="按设计原则、UML 类图到具体模式的顺序整理设计模式学习笔记，包含简单工厂、策略、装饰、观察者、单例、建造者等模式的意图与实现要点。"><meta name="author" content="心游"><link rel="sitemap" href="/sitemap-index.xml"><!-- Open Graph --><meta property="og:type" content="website"><meta property="og:site_name" content="心游的技术博客"><meta property="og:title" content="设计模式学习笔记：从设计原则到 23 种模式 | 心游的技术博客"><meta property="og:description" content="按设计原则、UML 类图到具体模式的顺序整理设计模式学习笔记，包含简单工厂、策略、装饰、观察者、单例、建造者等模式的意图与实现要点。"><meta property="og:url" content="https://figt-gonz.github.io/posts/design-patterns-notes/"><meta property="og:image" content="https://figt-gonz.github.io/posts/design-patterns-notes/index.png"><!-- Twitter / X --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://figt-gonz.github.io/posts/design-patterns-notes/"><meta property="twitter:title" content="设计模式学习笔记：从设计原则到 23 种模式 | 心游的技术博客"><meta property="twitter:description" content="按设计原则、UML 类图到具体模式的顺序整理设计模式学习笔记，包含简单工厂、策略、装饰、观察者、单例、建造者等模式的意图与实现要点。"><meta property="twitter:image" content="https://figt-gonz.github.io/posts/design-patterns-notes/index.png"><!-- RSS autodiscovery --><link rel="alternate" type="application/rss+xml" title="心游的技术博客" href="https://figt-gonz.github.io/rss.xml/"><!-- Filled at runtime by theme.ts to match the current background colour --><meta name="theme-color" content=""><!-- Extra head content injected by child layouts (e.g. JSON-LD, article meta) -->  <meta property="og:type" content="article"> <meta property="article:published_time" content="2025-05-17T13:41:00.000Z"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"设计模式学习笔记：从设计原则到 23 种模式 | 心游的技术博客","image":"https://figt-gonz.github.io/posts/design-patterns-notes/index.png","datePublished":"2025-05-17T13:41:00.000Z","author":[{"@type":"Person","name":"心游","url":"https://github.com/Figt-Gonz"}]}</script> <!--
+      Inline FOUC-prevention script: sets data-theme on <html> before
+      the browser paints. Runs synchronously, no defer/async.
+    --><script>
+      (function () {
+        const stored = localStorage.getItem("theme");
+        const isTheme = value => value === "light" || value === "dark";
+        if (stored !== null && !isTheme(stored)) {
+          localStorage.removeItem("theme");
+        }
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        ).matches;
+        const theme = isTheme(stored) ? stored : prefersDark ? "dark" : "light";
+        const root = document.firstElementChild;
+        root?.setAttribute("data-theme", theme);
+        root?.classList.toggle("dark", theme === "dark");
+        // Expose value so theme.ts can skip re-detection.
+        window.__theme = { value: theme };
+      })();
+    </script><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.CAqDO0tx.js"></script><link rel="stylesheet" href="/_astro/Footer.Rab_BM-_.css"><style>@keyframes astroFadeInOut{0%{opacity:1}to{opacity:0}}@keyframes astroFadeIn{0%{opacity:0;mix-blend-mode:plus-lighter}to{opacity:1;mix-blend-mode:plus-lighter}}@keyframes astroFadeOut{0%{opacity:1;mix-blend-mode:plus-lighter}to{opacity:0;mix-blend-mode:plus-lighter}}@keyframes astroSlideFromRight{0%{transform:translate(100%)}}@keyframes astroSlideFromLeft{0%{transform:translate(-100%)}}@keyframes astroSlideToRight{to{transform:translate(100%)}}@keyframes astroSlideToLeft{to{transform:translate(-100%)}}@media(prefers-reduced-motion){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}[data-astro-transition-scope]{animation:none!important}}
+</style><style>[data-astro-transition-scope="astro-36ssibgs-1"] { view-transition-name: \8BBE\8BA1\6A21\5F0F; }@layer astro { ::view-transition-old(\8BBE\8BA1\6A21\5F0F) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(\8BBE\8BA1\6A21\5F0F) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(\8BBE\8BA1\6A21\5F0F) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(\8BBE\8BA1\6A21\5F0F) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-1"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-1"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-1"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-1"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-36ssibgs-2"] { view-transition-name: java; }@layer astro { ::view-transition-old(java) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(java) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(java) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(java) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-2"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-2"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-2"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-2"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-2"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style><style>[data-astro-transition-scope="astro-36ssibgs-3"] { view-transition-name: \9762\5411\5BF9\8C61; }@layer astro { ::view-transition-old(\9762\5411\5BF9\8C61) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }::view-transition-new(\9762\5411\5BF9\8C61) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back]::view-transition-old(\9762\5411\5BF9\8C61) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back]::view-transition-new(\9762\5411\5BF9\8C61) { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; } }[data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-3"],
+			[data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-3"],
+			[data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }[data-astro-transition=back][data-astro-transition-fallback="old"] [data-astro-transition-scope="astro-36ssibgs-3"],
+			[data-astro-transition=back][data-astro-transition-fallback="old"][data-astro-transition-scope="astro-36ssibgs-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeOut; }[data-astro-transition=back][data-astro-transition-fallback="new"] [data-astro-transition-scope="astro-36ssibgs-3"],
+			[data-astro-transition=back][data-astro-transition-fallback="new"][data-astro-transition-scope="astro-36ssibgs-3"] { 
+	animation-duration: 180ms;
+	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+	animation-fill-mode: both;
+	animation-name: astroFadeIn; }</style></head> <body class="bg-background font-app text-foreground selection:bg-accent/75 selection:text-accent-foreground flex min-h-svh flex-col">    <a id="skip-to-content" href="#main-content" class="bg-background text-accent absolute inset-s-16 -top-full z-50 px-3 py-2 backdrop-blur-lg transition-all focus:top-4"> 跳到正文 </a> <header class="app-layout flex flex-col items-center justify-between sm:flex-row"> <div class="border-border bg-background relative flex w-full items-baseline justify-between border-b py-4 sm:items-center sm:py-6"> <a href="/" class="absolute py-1 text-xl leading-8 font-semibold whitespace-nowrap sm:static sm:my-auto sm:text-2xl sm:leading-none"> 心游的技术博客 </a> <nav id="nav-menu" class="flex w-full flex-col items-center sm:ms-2 sm:flex-row sm:justify-end sm:space-x-4 sm:py-0"> <button id="menu-btn" class="focus-outline self-end p-2 sm:hidden" aria-label="打开菜单" aria-expanded="false" aria-controls="menu-items" data-label-open="打开菜单" data-label-close="关闭菜单"> <svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="hidden" viewBox="0 0 24 24" id="close-icon"><path stroke="none" d="M0 0h24v24H0z" /><path d="M18 6 6 18M6 6l12 12" /></svg> <svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icons-tabler-outline icon-tabler-menu-deep" viewBox="0 0 24 24" id="menu-icon"><path stroke="none" d="M0 0h24v24H0z" /><path d="M4 6h16M7 12h13M10 18h10" /></svg> </button> <ul id="menu-items" class="[&>li>a]:hover:text-accent mt-4 hidden w-44 grid-cols-2 place-content-center gap-2 sm:mt-0 sm:flex sm:w-auto sm:gap-x-5 sm:gap-y-0 sm:[&>li]:h-8 [&>li>a]:block [&>li>a]:px-4 [&>li>a]:py-3 [&>li>a]:text-center [&>li>a]:font-medium sm:[&>li>a]:px-2 sm:[&>li>a]:py-1"> <li class="col-span-2"> <a href="/posts/" class="active-nav"> 文章 </a> </li> <li class="col-span-2"> <a href="/tags/"> 标签 </a> </li> <li class="col-span-2"> <a href="/about/"> 关于 </a> </li> <li class="col-span-2"> <a href="/archives/" title="归档" aria-label="归档" class="group inline-flex items-center gap-1 hover:text-accent focus-outline flex size-full justify-center p-3 sm:relative sm:size-8 sm:p-0">  <svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="hidden sm:absolute sm:top-1/2 sm:left-1/2 sm:block sm:size-6 sm:-translate-x-1/2 sm:-translate-y-1/2" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z" /><path d="M3 6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v0a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8M10 12h4" /></svg> <span class="sm:sr-only">归档</span>  </a> </li> <li class="col-span-1 flex items-center justify-center"> <a href="/search/" title="搜索" aria-label="搜索" class="group inline-flex items-center gap-1 hover:text-accent focus-outline relative size-8">  <svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="absolute top-1/2 left-1/2 size-6 -translate-x-1/2 -translate-y-1/2" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z" /><path d="M3 10a7 7 0 1 0 14 0 7 7 0 1 0-14 0M21 21l-6-6" /></svg> <span class="sr-only">搜索</span>  </a> </li> <li class="col-span-1 flex items-center justify-center"> <button id="theme-btn" class="focus-outline hover:[&>svg]:stroke-accent relative size-12 p-4 sm:size-8" title="切换主题" aria-label="auto" aria-live="polite"> <svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="absolute top-[50%] left-[50%] translate-[-50%] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z" /><path d="M12 3h.393a7.5 7.5 0 0 0 7.92 12.446A9 9 0 1 1 12 2.992z" /></svg> <svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="absolute top-[50%] left-[50%] translate-[-50%] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z" /><path d="M14.828 14.828a4 4 0 1 0-5.656-5.656 4 4 0 0 0 5.656 5.656M6.343 17.657l-1.414 1.414M6.343 6.343 4.929 4.929M17.657 6.343l1.414-1.414M17.657 17.657l1.414 1.414M4 12H2M12 4V2M20 12h2M12 20v2" /></svg> </button> </li> </ul> </nav> </div> </header> <script type="module">function c(){const e=document.querySelector("#menu-btn"),t=document.querySelector("#menu-items"),n=document.querySelector("#menu-icon"),s=document.querySelector("#close-icon");if(!e||!t||!n||!s)return;const a=e.dataset.labelOpen??"Open menu",l=e.dataset.labelClose??"Close menu";e.addEventListener("click",()=>{const o=e.getAttribute("aria-expanded")==="true";e.setAttribute("aria-expanded",o?"false":"true"),e.setAttribute("aria-label",o?a:l),t.classList.toggle("hidden"),t.classList.toggle("grid"),n.classList.toggle("hidden"),s.classList.toggle("hidden")})}c();document.addEventListener("astro:after-swap",c);</script> <div class="app-layout flex items-center justify-start"><a id="back-button" href="/" class="group inline-flex items-center gap-1 hover:text-accent focus-outline hover:text-foreground/75 -ms-2 mt-8 mb-2"> <svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="inline-block size-6 rtl:rotate-180" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z" /><path d="m15 6-6 6 6 6" /></svg><span>返回</span> </a></div><script type="module">function o(){const t=document.querySelector("#back-button"),e=sessionStorage.getItem("backUrl");e&&t&&(t.href=e)}document.addEventListener("astro:page-load",o);o();</script> <div class="relative mx-auto w-full max-w-app px-4"> <main id="main-content" class="w-full min-w-0" data-pagefind-body> <h1 style="view-transition-name:u008bbeu008ba1u006a21u005f0fu005b66u004e60u007b14u008bb0u00ff1au004eceu008bbeu008ba1u00539fu005219u005230-23-u0079cdu006a21u005f0f" class="text-accent inline-block text-2xl font-bold sm:text-3xl"> 设计模式学习笔记：从设计原则到 23 种模式 </h1> <div class="my-2 flex items-center gap-2"> <div class="text-muted-foreground flex items-center gap-x-2"> <svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="inline-block size-6 min-w-5.5" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z" /><path d="M4 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zM16 3v4M8 3v4M4 11h16M7 14h.013M10.01 14h.005M13.01 14h.005M16.015 14h.005M13.015 17h.005M7.01 17h.005M10.01 17h.005" /></svg>  <time class="text-sm sm:text-base" datetime="2025-05-17T13:41:00.000Z"> 17 May, 2025 </time> </div> <span aria-hidden="true" class="text-muted-foreground max-sm:hidden">
+|
+</span> <a href="https://github.com/Figt-Gonz/Figt-Gonz.github.io/edit/main/src/content/posts/design-patterns-notes.md" target="_blank" rel="noopener noreferrer" class="hover:text-accent text-muted-foreground flex justify-baseline gap-1.5 max-sm:hidden"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="inline-block" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z" /><path d="M7 7H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0-2.97-2.97L9 12v3h3zM16 5l3 3" /></svg><span>编辑页面</span></a> </div> <article id="article" class="mt-8 w-full app-prose max-w-app prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg)"> <p>设计模式背成 23 个名词不难，难的是判断什么场景该用哪个。这篇笔记从面向对象和设计原则讲起，再按顺序整理简单工厂、策略、装饰、观察者、迭代器、适配器、模板方法、工厂方法、单例、原型、建造者、抽象工厂、桥接等模式的意图、结构与实现要点，每个模式都配了类图或示意图。可以当速查手册翻，也适合跟着顺序过一遍。</p>
+<h2 id="学习思路">学习思路</h2>
+<ol>
+<li>
+<p>学习路线：</p>
+<p><a href="https://www.codefather.cn/course/1789189862986850306/section/1789190698894860290?type=&#x26;v=%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F#heading-10">https://www.codefather.cn/course/1789189862986850306/section/1789190698894860290?type=&#x26;v=%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F#heading-10</a></p>
+</li>
+<li>
+<p>书籍：</p>
+<ul>
+<li>图解设计模式，就着这本按顺序看</li>
+<li>深入设计模式，不懂的地方交叉着看</li>
+</ul>
+</li>
+<li>
+<p>优先级</p>
+<p><img alt="image-20241206001911773" loading="lazy" decoding="async" width="739" height="1080" src="/_astro/202412060019828.BZGD76_7_1yi306.webp" srcset=""></p>
+</li>
+</ol>
+<h2 id="基本概念">基本概念</h2>
+<h3 id="面向对象">面向对象</h3>
+<p>封装、继承、多态。</p>
+<p>万物皆对象。</p>
+<p>抽象类和接口的不同作用。</p>
+<p>抽象是精髓所在，万物皆对象，class 就是一种抽象。</p>
+<p>完成抽象，意味着囊括多种变化/数据/类型，应对不同的场景。让开发过程尽可能只需要对抽象进行具体化实现即可（复用/拓展），而不是说处处具体化，这样意味着效率低下和冗余。</p>
+<p><strong>好程序的标准：</strong></p>
+<ol>
+<li>可维护</li>
+<li>可拓展</li>
+<li>可复用</li>
+<li>灵活性好</li>
+</ol>
+<h3 id="uml-类图">UML 类图</h3>
+<p><a href="https://zhuanlan.zhihu.com/p/109655171">30分钟学会UML类图-知乎</a></p>
+<h2 id="设计原则">设计原则</h2>
+<h3 id="单一职责原则-s">单一职责原则 S</h3>
+<p>对于一个类而言，应该仅有一个引起它变化的原因。每个类、每个方法只有一项具体的职责。简单来说就是某一种变化只对应某个类/方法，而不会在多种需求出现时只改变一个类。</p>
+<p>单一职责意味着耦合性的降低。</p>
+<p>形象的举例：手机阅读 or 电子阅读器阅读</p>
+<h3 id="开放-封闭原则-o">开放-封闭原则 O</h3>
+<p>对拓展开放，对修改封闭。对迎面而来的变化，尽可能化为一种拓展，而不是对原有逻辑的修改。这就要求我们在开发、设计过程中，要合理的利用抽象（类、抽象类、接口），使得变化发生时，只需拓展一些类即可，而不用修改原有的类。</p>
+<p>当然，过度抽象也是不必要的，过犹不及。</p>
+<h3 id="依赖倒置原则-d">依赖倒置原则 D</h3>
+<p>依赖抽象（接口/抽象类），而不是具体实现。（面向接口编程，而不是具体实现）</p>
+<p>如果依赖具体的实现，比如高层模块依赖底层模块，那么如果现在底层模块不能满足需求，我们就无法使用高层模块了。所以要把依赖底层实现（具体实现）变为依赖某个抽象（接口/抽象类），这样哪怕原本的底层模块不能使用，但依赖的接口/抽象类没有问题，那么我们就可以进行另外的拓展，来替换掉原来的底层模块。</p>
+<p>这里的替换，也涉及到另外的一个原则——<strong>里式替换原则 L</strong>，即所有子类都可以替换掉其父类，也就是说，所有子类一定是可以完成父类的工作的（而这就要求我们采取继承关系，一定是 is-a 的关系，例子：以这种原则来说，企鹅不能继承鸟，因为它不会飞），所以我们依赖父类这个抽象，就可以通过继承、多态来达成可复用、可拓展、高灵活性的效果。而如果不满足这个原则，继承关系将出现问题，比如原本依赖父类某个方法，现在提供了一个子类它不满足里式替换（重写的方法返回值、抛出异常不满足）那么原本的程序将会报错。</p>
+<p>另外提一点，为了保证所有子类可以替换掉父类，里式替换原则对子类拓展父类提出了很多要求，尤其是方法重写上，比如返回值、访问修饰符、抛出的异常等，但这里很多编程语言已经帮我们做出了规定（Java 的重写规则）</p>
+<h3 id="接口隔离原则-i">接口隔离原则 I</h3>
+<p>降低接口的颗粒度，避免“臃肿”接口。实现臃肿的接口会造成部分功能不会被实现类使用到，而如果需要修改接口的时候，同时也要修改实现了它的类。正确的做法是把一个接口的职责拆分开，实现类按需实现不同的接口，这样更加灵活，易于维护，修改较少。详见深入设计模式内容。</p>
+<h2 id="设计模式内容">设计模式内容</h2>
+<h3 id="设计模式的分类">设计模式的分类</h3>
+<ul>
+<li>创建型</li>
+<li>结构型</li>
+<li>行为型</li>
+</ul>
+<h3 id="简单工厂模式">简单工厂模式</h3>
+<p>多个类继承一个基类，再通过专门的工厂类（Factory），根据相应的要求（变化点、参数），来构建这个基类对象（多态），完成不同的功能。当需要拓展功能的时候，只需要添加一对应的子类即可。</p>
+<p>场景：一个计算器的程序设计</p>
+<p>一般的思路是：在一个类中完成所有工作，用户输入、程序接收，判定操作符（switch）、得到计算结果。</p>
+<p>但是为了达到可拓展、易维护的目的，这样做肯定是不行的。</p>
+<ol>
+<li>
+<p>用户图形界面与业务（计算）关联在一起，代码掺杂在一起，这对于后续进行拓展是不利的。你需要人工地再去读代码，整理每个部分的功能。</p>
+<p>所以要将业务逻辑和界面逻辑分开，将它们的耦合度降低。（单独封装一个 Operation 类）</p>
+</li>
+<li>
+<p>运算符的算法都在一起，修改一个运算的算法会暴露所有的算法，有修改的风险。</p>
+<p>为了方便后续的拓展，比如要添加新的运算，指数运算，可以将所有的运算操作都封装为单独的类，继承 Operation 类，完成相应计算。这样后续对每个算法修改只需要打开单独的类即可，添加新的算法也只需要添加新的类即可。</p>
+</li>
+<li>
+<p>使用简单工厂模式，添加 OperationFactory 类，由它来创建 Operation 对象，通过传入的操作符参数，判定具体创建哪个运算对象（Add/Sub/Mul/Div）再执行 Operation 的<code>getResult()</code>方法，通过多态来决定运行时具体执行哪个方法。</p>
+</li>
+</ol>
+<p>本质上其实就是完成对象的构建，把对象构建过程单独拎出来交给一个类/方法/代码段，这都可以称作工厂模式。</p>
+<p>不一定要是一个类，只要逻辑上有这种功能，结合设计原则（单一职责、开闭…）即可</p>
+<p><strong>工厂模式它的主要目的不是为了创建对象实例，而是创建实例来使用（不是为了创建而创建，而是为了使用而创建），所以工厂中可以加入具体的业务逻辑。</strong></p>
+<h3 id="策略模式">策略模式</h3>
+<p>定义算法家族，并分别进行封装，算法的之间可以进行替换（根据一定的条件使用不同的算法），而且即使算法发生变化，也不会影响到使用者。</p>
+<p>大致的思想与简单工厂模式有类似之处。</p>
+<p>简单来说就是通过定义一个算法基类，子类来实现具体算法，再定义一个调用者，包含一个基类对象，通过传递不同的参数，来使用到基类中不同的算法。</p>
+<h3 id="装饰模式">装饰模式</h3>
+<p>核心是为了保证一个基础的类它的简单性，通过<strong>使用其他类组合来代替直接向其中添加代码，维持类的单一职责（单一、简单）和开闭原则（可拓展、而不修改）</strong></p>
+<p>基本的思路是，定义一个接口，下面一个基本功能的实现类，再有一个作为拓展功能基类的实现类，持有一个接口字段，在其中调用这个接口字段的方法，其子类通过添加其他逻辑，重写接口字段方法，调用父类（基本功能类）接口字段方法的同时添加上新的逻辑。这样在使用时，可以创建一个基本功能实现类，再创建拓展功能类，传入基本实现类，实现一个包装装饰，这样执行方法时既完成了基本实现类的工作，有有了新的功能（装饰）。</p>
+<h3 id="观察者模式与发布订阅模式">观察者模式与发布订阅模式</h3>
+<ul>
+<li>观察者模式
+<ul>
+<li>被观察者持有观察者的引用，当发生一些事件时，通知观察者（调用观察者的方法）</li>
+<li>通过定义一个 Observer 接口，来实现观察者与被观察者的松耦合，每次只需要调用 Observer 的固定方法来通知不同的具体实现子类</li>
+<li>特点：面向接口编程，实现松耦合</li>
+</ul>
+</li>
+<li>发布订阅模式
+<ul>
+<li>发布者与订阅者之间存在一个 Broker，来做事件的传递，从而实现完全耦合</li>
+</ul>
+</li>
+<li>总结
+<ul>
+<li>使用场景不同，一个松耦合一个完全解耦，就好比公司送月饼、粽子给员工，是自己部门派发，而公司给其他公司寄送物件，是交给快递公司来寄送。</li>
+<li>比喻是理解了，但实际的应用场景还是不清楚</li>
+</ul>
+</li>
+</ul>
+<blockquote><p>相关文章：<a href="https://zhuanlan.zhihu.com/p/51357583">https://zhuanlan.zhihu.com/p/51357583</a></p></blockquote>
+<h3 id="迭代器模式-itorator">迭代器模式-Itorator</h3>
+<h4 id="结构">结构</h4>
+<p>普遍结构：</p>
+<p><img alt="image-20241207220201445" loading="lazy" decoding="async" width="849" height="472" src="/_astro/image-20241207220201445.BQzjMwNU_Z56ulP.webp" srcset=""></p>
+<p>示例结构：</p>
+<p><img alt="image-20241207221248503" loading="lazy" decoding="async" width="960" height="756" src="/_astro/image-20241207221248503.XQcznZ6X_1uqDY.webp" srcset=""></p>
+<h4 id="使用场景">使用场景</h4>
+<p>对自定义容器进行遍历操作时，可考虑使用迭代器模式。</p>
+<h4 id="优势">优势</h4>
+<ul>
+<li><strong>符合依赖倒置原则</strong>。遍历操作依赖接口而不是具体实现，当容器的实现改变，比如存储数据结构从 array 改为使用 ArrayList，不需要修改原来的遍历代码，仍旧采用上面的接口方法调用即可。</li>
+<li><strong>符合开闭原则</strong>，无需修改 Iterator 类，只需要新增一个实现类应对该情况即可。</li>
+</ul>
+<h3 id="适配器模式-adapter">适配器模式-Adapter</h3>
+<h4 id="结构-1">结构</h4>
+<p><img alt="image-20241208224649315" loading="lazy" decoding="async" width="998" height="821" src="/_astro/202412082246429.B8NioyCy_S8w2M.webp" srcset=""></p>
+<h5 id="举例实现结构">举例实现结构</h5>
+<p><img alt="image-20241208230231553" loading="lazy" decoding="async" width="932" height="414" src="/_astro/202412082302605.MbFpqY-R_q5T5p.webp" srcset=""></p>
+<h4 id="使用场景-1">使用场景</h4>
+<ul>
+<li>让现有的类适配新的接口（API）时，几乎总是会使用 Adapter 模式。能够达到不修改现有类（Client、Target 角色），而使新的接口（Adaptee）适配于它们，实现对应功能的效果。</li>
+<li>软件、库版本升级时，为保持与旧版本 API 兼容，可将新版本作为 Adaptee 角色，旧版本 API 作为 Target 角色，通过 Adapter 使得新版本 API 能够兼容旧版本 API</li>
+</ul>
+<p><img alt="image-20241229212546686" loading="lazy" decoding="async" width="940" height="211" src="/_astro/202412292125739.B_Zi1rQF_VpT09.webp" srcset=""></p>
+<h3 id="模板方法模式-template-method">模板方法模式-Template Method</h3>
+<h4 id="结构-2">结构</h4>
+<p><img alt="image-20241208231708310" loading="lazy" decoding="async" width="981" height="424" src="/_astro/202412082317356.DNaxYNTu_ZUnC65.webp" srcset=""></p>
+<h4 id="使用场景-2">使用场景</h4>
+<p>当我们编写不同类时，当发现多个类中存在重复逻辑，想要将重复逻辑复用，而特定逻辑保留时，就可以使用模板方法模式。</p>
+<p>在抽象父类中定义通用可复用的流程，并将一些特定步骤交给子类实现，达到代码复用效果的同时，也能通过多态保持一定灵活性。</p>
+<h4 id="拓展点">拓展点</h4>
+<ul>
+<li>在抽象父类中使用 <code>final</code> 修饰方法，表明其无法被重写，这是应该属于父类中的方法。</li>
+</ul>
+<h3 id="工厂方法模式-factory-method">工厂方法模式-Factory Method</h3>
+<h4 id="结构-3">结构</h4>
+<p><img alt="image-20241208235655439" loading="lazy" decoding="async" width="971" height="559" src="/_astro/202412082356488.HGN2IFWJ_Z1K8O6.webp" srcset=""></p>
+<h4 id="使用场景-3">使用场景</h4>
+<p>工厂方法模式，是模板方法模式的一种应用场景，用来创建对象实例的。</p>
+<p>我理解，一开始一定是一个简单工厂模式，当需要创建另一类完全不同类型的产品时，此时就需要另一个工厂，创建另一类产品。此时就可以考虑引入工厂方法模式，进行抽象以及复用了。</p>
+<h3 id="单例模式-singleton">单例模式-Singleton</h3>
+<p>保证一个类仅可存在一个实例。适用于一些不需要重复创建/创建较为消耗资源的类。</p>
+<p>Java 中单例的 6 种写法：</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="java"><code><span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#FFCB8B"> Singleton</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">{</span><span style="--shiki-light:#C2C3C5;--shiki-light-font-style:inherit;--shiki-dark:#637777;--shiki-dark-font-style:italic">//饿汉式</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">    private</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic"> static</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic"> final</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA"> Singleton</span><span style="--shiki-light:#24292EFF;--shiki-dark:#C5E478"> instance</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA"> =</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic"> new</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic"> Singleton</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D9F5DD">()</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    </span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">    private</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic"> Singleton</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D9F5DD">()</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">{</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">        </span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    }</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    </span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">    public</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic"> static</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA"> Singleton</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic"> getInstance</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D9F5DD">()</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">{</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">        return</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> instance;</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    }</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#FFCB8B"> Singleton</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">{</span><span style="--shiki-light:#C2C3C5;--shiki-light-font-style:inherit;--shiki-dark:#637777;--shiki-dark-font-style:italic">//懒汉式，线程不安全</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">    private</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic"> static</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA"> Singleton</span><span style="--shiki-light:#24292EFF;--shiki-dark:#C5E478"> instance</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    </span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">    private</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic"> Singleton</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D9F5DD">()</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">{</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">        </span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    }</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    </span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">    public</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic"> static</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA"> Singleton</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic"> getInstance</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D9F5DD">()</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">{</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">        if</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">(instance </span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">==</span><span style="--shiki-light:#1976D2;--shiki-dark:#82AAFF"> null</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">){</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">            instance </span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">=</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic"> new</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic"> Singleton</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D9F5DD">()</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">        }</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">        return</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> instance;</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    }</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#FFCB8B"> Singleton</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">{</span><span style="--shiki-light:#C2C3C5;--shiki-light-font-style:inherit;--shiki-dark:#637777;--shiki-dark-font-style:italic">//懒汉式，线程安全</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">    private</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic"> static</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA"> Singleton</span><span style="--shiki-light:#24292EFF;--shiki-dark:#C5E478"> instance</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA"> =</span><span style="--shiki-light:#1976D2;--shiki-dark:#82AAFF"> null</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    </span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">    private</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic"> Singleton</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D9F5DD">()</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">{</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">        </span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    }</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    </span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">    synchronized</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic"> public</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic"> static</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA"> Singleton</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic"> getInstance</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D9F5DD">()</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">{</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">        if</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">(instance </span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">==</span><span style="--shiki-light:#1976D2;--shiki-dark:#82AAFF"> null</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">){</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">            instance </span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">=</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic"> new</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic"> Singleton</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D9F5DD">()</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">        }</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">        return</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> instance;</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    }</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#FFCB8B"> Singleton</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">{</span><span style="--shiki-light:#C2C3C5;--shiki-light-font-style:inherit;--shiki-dark:#637777;--shiki-dark-font-style:italic">//双重校验锁🔒，线程安全</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">    private</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic"> static</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic"> volatile</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA"> Singleton</span><span style="--shiki-light:#24292EFF;--shiki-dark:#C5E478"> instance</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">; </span><span style="--shiki-light:#C2C3C5;--shiki-light-font-style:inherit;--shiki-dark:#637777;--shiki-dark-font-style:italic">//需要使用 volatile 关键字，保证其他线程可见，共享该变量，并且防止指令重排序，避免重排序导致的返回未初始化的对象变量。</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    </span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">    private</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic"> Singleton</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D9F5DD">()</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">{</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">        </span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    }</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    </span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">    public</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic"> static</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA"> Singleton</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic"> getInstance</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D9F5DD">()</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">{</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">        </span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">        if</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">(instance </span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">==</span><span style="--shiki-light:#1976D2;--shiki-dark:#82AAFF"> null</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">){</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">            synchronized</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> (</span><span style="--shiki-light:#1976D2;--shiki-dark:#C5E478">Singleton</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">.</span><span style="--shiki-light:#1976D2;--shiki-light-font-style:inherit;--shiki-dark:#FAF39F;--shiki-dark-font-style:italic">class</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">){</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">                if</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">(instance </span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">==</span><span style="--shiki-light:#1976D2;--shiki-dark:#82AAFF"> null</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">){</span><span style="--shiki-light:#C2C3C5;--shiki-light-font-style:inherit;--shiki-dark:#637777;--shiki-dark-font-style:italic">//必须有,如果没有,线程同时通过上面的 == null,会创建多个实例</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">                    instance </span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">=</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic"> new</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic"> Singleton</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D9F5DD">()</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">                }</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">        	}</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">        }</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">        </span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">        return</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> instance;</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    }</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">public</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#FFCB8B"> Singleton</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> {</span><span style="--shiki-light:#C2C3C5;--shiki-light-font-style:inherit;--shiki-dark:#637777;--shiki-dark-font-style:italic">// 静态内部类方式，利用类加载保证线程安全</span></span>
+<span class="line"><span style="--shiki-light:#C2C3C5;--shiki-light-font-style:inherit;--shiki-dark:#637777;--shiki-dark-font-style:italic">    // 私有化构造方法，防止外部直接实例化</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">    private</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic"> Singleton</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D9F5DD">()</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> { </span></span>
+<span class="line"><span style="--shiki-light:#1976D2;--shiki-dark:#C5E478">        System</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">.</span><span style="--shiki-light:#1976D2;--shiki-light-font-style:inherit;--shiki-dark:#FAF39F;--shiki-dark-font-style:italic">out</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">.</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">println</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D9F5DD">(</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Singleton instance created</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D9F5DD">)</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#C2C3C5;--shiki-light-font-style:inherit;--shiki-dark:#637777;--shiki-dark-font-style:italic">    // 静态内部类，持有外部类的单例实例</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">    private</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic"> static</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic"> class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#FFCB8B"> SingletonHolder</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> {</span></span>
+<span class="line"><span style="--shiki-light:#C2C3C5;--shiki-light-font-style:inherit;--shiki-dark:#637777;--shiki-dark-font-style:italic">        // 静态内部类的静态成员，即外部类的唯一实例</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">        private</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic"> static</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic"> final</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA"> Singleton</span><span style="--shiki-light:#24292EFF;--shiki-dark:#C5E478"> INSTANCE</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA"> =</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic"> new</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic"> Singleton</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D9F5DD">()</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#C2C3C5;--shiki-light-font-style:inherit;--shiki-dark:#637777;--shiki-dark-font-style:italic">    // 公共静态方法，提供单例的全局访问点</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">    public</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic"> static</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA"> Singleton</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic"> getInstance</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D9F5DD">()</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> {</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">        return</span><span style="--shiki-light:#1976D2;--shiki-dark:#C5E478"> SingletonHolder</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">.</span><span style="--shiki-light:#1976D2;--shiki-light-font-style:inherit;--shiki-dark:#FAF39F;--shiki-dark-font-style:italic">INSTANCE</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#C2C3C5;--shiki-light-font-style:inherit;--shiki-dark:#637777;--shiki-dark-font-style:italic">    // 示例方法</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">    public</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA"> void</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic"> doSomething</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D9F5DD">()</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> {</span></span>
+<span class="line"><span style="--shiki-light:#1976D2;--shiki-dark:#C5E478">        System</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">.</span><span style="--shiki-light:#1976D2;--shiki-light-font-style:inherit;--shiki-dark:#FAF39F;--shiki-dark-font-style:italic">out</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">.</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">println</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D9F5DD">(</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#22863A;--shiki-dark:#ECC48D">Doing something in Singleton</span><span style="--shiki-light:#22863A;--shiki-dark:#D9F5DD">"</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D9F5DD">)</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    }</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    </span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">    public</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic"> static</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA"> void</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic"> main</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D9F5DD">(</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">String</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">[] </span><span style="--shiki-light:#24292EFF;--shiki-dark:#D7DBE0">args</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D9F5DD">)</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> {</span></span>
+<span class="line"><span style="--shiki-light:#C2C3C5;--shiki-light-font-style:inherit;--shiki-dark:#637777;--shiki-dark-font-style:italic">        // 获取单例实例并调用方法</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">        Singleton</span><span style="--shiki-light:#24292EFF;--shiki-dark:#C5E478"> singleton1</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA"> =</span><span style="--shiki-light:#1976D2;--shiki-dark:#C5E478"> Singleton</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">.</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">getInstance</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D9F5DD">()</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="--shiki-light:#1976D2;--shiki-dark:#C5E478">        singleton1</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">.</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">doSomething</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D9F5DD">()</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="--shiki-light:#C2C3C5;--shiki-light-font-style:inherit;--shiki-dark:#637777;--shiki-dark-font-style:italic">        // 验证同一个实例</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">        Singleton</span><span style="--shiki-light:#24292EFF;--shiki-dark:#C5E478"> singleton2</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA"> =</span><span style="--shiki-light:#1976D2;--shiki-dark:#C5E478"> Singleton</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">.</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">getInstance</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D9F5DD">()</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="--shiki-light:#1976D2;--shiki-dark:#C5E478">        System</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">.</span><span style="--shiki-light:#1976D2;--shiki-light-font-style:inherit;--shiki-dark:#FAF39F;--shiki-dark-font-style:italic">out</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">.</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">println</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D9F5DD">(</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">singleton1 </span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">==</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> singleton2</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D9F5DD">)</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">; </span><span style="--shiki-light:#C2C3C5;--shiki-light-font-style:inherit;--shiki-dark:#637777;--shiki-dark-font-style:italic">// 输出 true，证明是同一个实例</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    }</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">}</span></span></code></pre>
+<h3 id="原型模式-prototype">原型模式-Prototype</h3>
+<h4 id="核心思想">核心思想</h4>
+<p>通过对象实例而不是 <code>new MyClass()</code> 来创建实例。</p>
+<h4 id="结构-4">结构</h4>
+<p>基本结构：</p>
+<p><img alt="image-20241210002327612" loading="lazy" decoding="async" width="968" height="487" src="/_astro/202412100023676.B-a--NJN_A1k64.webp" srcset=""></p>
+<p>示例结构：</p>
+<p><img alt="image-20241210002347774" loading="lazy" decoding="async" width="1029" height="584" src="/_astro/202412100023827.CUW16pHO_EJbSK.webp" srcset=""></p>
+<h4 id="使用场景-4">使用场景</h4>
+<ul>
+<li>难以根据类来生成实例时。比如一个类是根据用户阶段性的输入生成的，此时想要再生成一个同样的实例，靠 new 的方式是困难的。此时根据实例来生成实例就简单得多。</li>
+</ul>
+<p>书中给的案例是使用 Object 的 clone 进行对象克隆，关于 clone 方法的使用需要另外注意。可参考 Effective Java 中的建议。</p>
+<h3 id="建造者模式-builder">建造者模式-Builder</h3>
+<h4 id="结构-5">结构</h4>
+<h5 id="基本结构">基本结构</h5>
+<p><img alt="image-20241216235829168" loading="lazy" decoding="async" width="974" height="483" src="/_astro/202412162358223.w1Lzz659_ZYt3qg.webp" srcset=""></p>
+<h5 id="示例结构">示例结构</h5>
+<p><img alt="image-20241216235743993" loading="lazy" decoding="async" width="974" height="658" src="/_astro/202412162357083.Jbd3_8A6_Fq70k.webp" srcset=""></p>
+<h4 id="使用场景-5">使用场景</h4>
+<p>构建复杂结构的对象实例时可考虑使用。</p>
+<h4 id="拓展点-1">拓展点</h4>
+<ul>
+<li>其与[模板方法模式](#模板方法模式-Template Method)的不同在于，模板方法是在抽象父类中定义了执行模板，决定了子类方法的执行流程、顺序；而建造者模式中子类方法的执行流程是在 Director 类（即 Builder 的使用者）中决定的。</li>
+<li>其与外观模式（Facade）有相似之处。建造者模式通过在 Director 中组合 Builder 的方法，为外界提供一个简单的生成实例的接口（API），在示例中则是 <code>constructor</code> 方法；而外观模式是通过组合内部模块向外部提供可以简单调用的接口（API）</li>
+</ul>
+<h3 id="抽象工厂模式-abstract-factory">抽象工厂模式-Abstract Factory</h3>
+<h4 id="结构-6">结构</h4>
+<h5 id="基本结构-1">基本结构</h5>
+<p><img alt="image-20241229154118367" loading="lazy" decoding="async" width="912" height="947" src="/_astro/202412291541442.Bguv4qlg_Z2giWzd.webp" srcset=""></p>
+<h5 id="示例结构-1">示例结构</h5>
+<p><img alt="image-20241229154042705" loading="lazy" decoding="async" width="969" height="994" src="/_astro/202412291540790.BlIpDtDZ_Z15DhFn.webp" srcset=""></p>
+<h4 id="使用场景-6">使用场景</h4>
+<p>我理解抽象工厂是工厂方法模式演化而来的。当工厂方法模式中，不止需要创建一种产品，需要不同的工厂，而这些产品、工厂有可以统一进行抽象。从而有了抽象工厂、抽象零件、抽象产品等概念，进而就变为了抽象工厂了。</p>
+<p>同时，工厂方法中一般指存在一个 create 方法，而抽象工厂中通常存在一组 create 方法来创建不同的产品。</p>
+<h4 id="拓展点-2">拓展点</h4>
+<p>优势：在添加新的产品子类时会很容易，只需要实现/继承现有基类即可。</p>
+<p>劣势：在添加新的产品/零件时会很麻烦，需要添加一个新的基类/接口，然后修改工厂基类添加一个新的 create 方法并修改所有具体实现类</p>
+<h3 id="桥接模式-bridge">桥接模式-Bridge</h3>
+<h4 id="核心思想-1">核心思想</h4>
+<p>利用委托的方式，将<strong>类的功能层次结构</strong>与<strong>类的实现层次结构</strong>进行分离。功能结构的修改、拓展只需要关注<strong>类的功能层次结构</strong>，可以复用已有实现侧代码的同时又不变动实现侧代码。反过来实现层次结构的修改、拓展只需要关注<strong>类的实现层次结构</strong>。</p>
+<p>组合优于继承原则的具象化。例子：</p>
+<p><img alt="image-20241229212245092" loading="lazy" decoding="async" width="863" height="996" src="/_astro/202412292122160.DdbUvCh4_2crIVf.webp" srcset=""></p>
+<p><img alt="image-20241229212226320" loading="lazy" decoding="async" width="1002" height="996" src="/_astro/202412292122389.CSPK7OTQ_Z1oakoh.webp" srcset=""></p>
+<h4 id="结构-7">结构</h4>
+<h5 id="基本结构-2">基本结构</h5>
+<p><img alt="image-20241229161216163" loading="lazy" decoding="async" width="902" height="379" src="/_astro/202412291612220.B3OMivAm_Z15s86f.webp" srcset=""></p>
+<h5 id="示例结构-2">示例结构</h5>
+<p><img alt="image-20241229173418643" loading="lazy" decoding="async" width="1019" height="404" src="/_astro/202412291734710.DYJ6gsl9_qaS7H.webp" srcset=""></p>
+<h3 id="策略模式-strategy">策略模式-Strategy</h3>
+<h4 id="核心思想-2">核心思想</h4>
+<p>依赖倒置思想的具象化。即定义接口，通过依赖接口、使用接口而不是具体类，达成与不同具体策略算法的解耦。想要更换策略、拓展策略，只需要切换依赖项、拓展新的实现类即可。</p>
+<h4 id="结构-8">结构</h4>
+<h5 id="基本结构-3">基本结构</h5>
+<p><img alt="image-20241229205850551" loading="lazy" decoding="async" width="983" height="486" src="/_astro/202412292058616.DEBOsGfK_Z1lDFbB.webp" srcset=""></p>
+<h5 id="示例结构-3">示例结构</h5>
+<p><img alt="image-20241229205947548" loading="lazy" decoding="async" width="992" height="440" src="/_astro/202412292059618.BXWB0_Ow_dpSis.webp" srcset=""></p>
+<h3 id="组合模式-composite">组合模式-Composite</h3>
+<h4 id="核心思想-3">核心思想</h4>
+<p>通过组合的方式，构建具有一致性（通过接口/抽象类）的递归结构。</p>
+<p>举例：</p>
+<ul>
+<li>Android 中的 View、ViewGroup 结构。</li>
+<li>文件系统中的 File 与 Directory 结构。</li>
+</ul>
+<h4 id="结构-9">结构</h4>
+<h5 id="基本结构-4">基本结构</h5>
+<p><img alt="image-20241231151554521" loading="lazy" decoding="async" width="978" height="654" src="/_astro/image-20241231151554521.DqftERsY_1UPHDd.webp" srcset=""></p>
+<h5 id="示例结构-4">示例结构</h5>
+<p><img alt="image-20241231151538002" loading="lazy" decoding="async" width="1025" height="686" src="/_astro/image-20241231151538002.w7BdeLpz_Zlvhzc.webp" srcset=""></p>
+<h3 id="访问者模式-visitor">访问者模式-Visitor</h3>
+<h4 id="核心思想-4">核心思想</h4>
+<p>将复杂数据结构与对该数据结构的访问、处理进行分离。在不影响数据结构的情况下，增加处理的功能。</p>
+<p>典型应用：</p>
+<ul>
+<li>ASM 库，Java 字节码插桩。</li>
+</ul>
+<h4 id="结构-10">结构</h4>
+<h5 id="基本结构-5">基本结构</h5>
+<p><img alt="image-20241231154733785" loading="lazy" decoding="async" width="974" height="369" src="/_astro/image-20241231154733785.Dpv4o2bR_Z1xemwM.webp" srcset=""></p>
+<h5 id="示例结构-5">示例结构</h5>
+<p><img alt="image-20241231153551176" loading="lazy" decoding="async" width="999" height="796" src="/_astro/image-20241231153551176.DaE6hdZ6_28WBxW.webp" srcset=""></p>
+<h4 id="优劣势">优劣势</h4>
+<p><img alt="image-20241231194420899" loading="lazy" decoding="async" width="988" height="405" src="/_astro/image-20241231194420899.CuyrEVTP_YYhfY.webp" srcset=""></p>
+<p>适用于数据结构比较稳定，很少变动的场景。比如字节码格式。</p>
+<h3 id="装饰模式-decorator">装饰模式-Decorator</h3>
+<h4 id="核心思想-5">核心思想</h4>
+<p>通过组合、委托的方式，对同一接口功能进行递归调用，在其功能可以自由选定、组装的同时，也能达到接口增强的效果。</p>
+<h4 id="结构-11">结构</h4>
+<h5 id="基本结构-6">基本结构</h5>
+<p><img alt="image-20241229222323240" loading="lazy" decoding="async" width="1008" height="788" src="/_astro/202412292223312.DwQZXEs9_Z2hblCa.webp" srcset=""></p>
+<h5 id="示例结构-6">示例结构</h5>
+<p><img alt="image-20241229222349683" loading="lazy" decoding="async" width="942" height="822" src="/_astro/202412292223750.DzB7sj2B_Z20WgjN.webp" srcset=""></p>
+<h4 id="拓展点-3">拓展点</h4>
+<ul>
+<li>其与典型责任链的不同在于，它的执行过程往往无法中断，可以理解为一条任务链</li>
+</ul>
+<h3 id="责任链模式-chain-of-responsibility">责任链模式-Chain Of Responsibility</h3>
+<h4 id="核心思想-6">核心思想</h4>
+<p>构建一条处理请求的链条，按顺序遍历，决定谁来处理该请求。</p>
+<h4 id="结构-12">结构</h4>
+<h5 id="基本结构-7">基本结构</h5>
+<p><img alt="image-20241229214520084" loading="lazy" decoding="async" width="979" height="553" src="/_astro/202412292145144.4yXrV1vX_MDokl.webp" srcset=""></p>
+<h5 id="示例结构-7">示例结构</h5>
+<p><img alt="image-20241229214622150" loading="lazy" decoding="async" width="965" height="425" src="/_astro/202412292146208.BnvX4qAS_7eFpW.webp" srcset=""></p>
+<h4 id="使用场景-7">使用场景</h4>
+<ul>
+<li>
+<p>任务链场景。我理解任务链是一种特殊的责任链，链路上的每个节点都会进行处理。用于分步骤执行的任务链场景，比如 TCP、RPC 通信过程中协议数据的组装。认证过程中一系列操作的执行。（这里的任务链可以理解为是装饰模式）
+其优势在于可以方便地组合、排布不同的任务，后续有新的操作需求可以非常方便地拓展。</p>
+</li>
+<li>
+<p>Android 中事件传递机制，是责任链模式的典型应用。</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="java"><code><span class="line"><span style="--shiki-light:#C2C3C5;--shiki-light-font-style:inherit;--shiki-dark:#637777;--shiki-dark-font-style:italic">// ViewGroup 的事件分发流程伪代码</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">fun </span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">dispatchTouchEvent</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D9F5DD">(</span><span style="--shiki-light:#6F42C1;--shiki-dark:#82AAFF">ev</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">:</span><span style="--shiki-light:#6F42C1;--shiki-dark:#82AAFF"> MotionEvent</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D9F5DD">)</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic"> :</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> Boolean {</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">    var</span><span style="--shiki-light:#24292EFF;--shiki-dark:#C5E478"> result</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA"> =</span><span style="--shiki-light:#1976D2;--shiki-dark:#82AAFF"> false</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">    if</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> (</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">onInterceptTouchEvent</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D9F5DD">(</span><span style="--shiki-light:#6F42C1;--shiki-dark:#82AAFF">ev</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D9F5DD">)</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">) {</span><span style="--shiki-light:#C2C3C5;--shiki-light-font-style:inherit;--shiki-dark:#637777;--shiki-dark-font-style:italic">// ViewGroup 自己是否进行拦截</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">        result </span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">=</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic"> onTouchEvent</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D9F5DD">(</span><span style="--shiki-light:#6F42C1;--shiki-dark:#82AAFF">ev</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D9F5DD">)</span><span style="--shiki-light:#C2C3C5;--shiki-light-font-style:inherit;--shiki-dark:#637777;--shiki-dark-font-style:italic">// 如果拦截，直接调用自己的 onTouchEvent() 方法进行处理</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    } </span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">else</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> {</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">        result </span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">=</span><span style="--shiki-light:#1976D2;--shiki-dark:#C5E478"> child</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">.</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">dispatchTouchEvent</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D9F5DD">(</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">ev</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D9F5DD">)</span><span style="--shiki-light:#C2C3C5;--shiki-light-font-style:inherit;--shiki-dark:#637777;--shiki-dark-font-style:italic">// 如果不拦截，交由子视图进行处理，分发，这里实际上是会遍历所有子视图看是否处理</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    }</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">    return</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> result</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">}</span></span></code></pre>
+</li>
+</ul>
+<h4 id="拓展思路">拓展思路</h4>
+<ul>
+<li>
+<p>责任链构建的过程，可以使用其他模式进行进一步封装。</p>
+<ul>
+<li>
+<p>构建操作</p>
+</li>
+<li>
+<p>使用责任链进行处理</p>
+</li>
+</ul>
+</li>
+<li>
+<p>可以使用方法递归和迭代两种调用方式来进行责任链任务的执行</p>
+<ul>
+<li>
+<p>递归</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="java"><code><span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">public</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA"> void</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic"> support</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D9F5DD">(</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">Trouble</span><span style="--shiki-light:#6F42C1;--shiki-dark:#82AAFF"> trouble</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D9F5DD">)</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> {  </span><span style="--shiki-light:#C2C3C5;--shiki-light-font-style:inherit;--shiki-dark:#637777;--shiki-dark-font-style:italic">// 解决问题的步骤</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">    if</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> (</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">resolve</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D9F5DD">(</span><span style="--shiki-light:#6F42C1;--shiki-dark:#82AAFF">trouble</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D9F5DD">)</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">) {</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">        done</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D9F5DD">(</span><span style="--shiki-light:#6F42C1;--shiki-dark:#82AAFF">trouble</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D9F5DD">)</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    } </span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">else</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic"> if</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> (next </span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">!=</span><span style="--shiki-light:#1976D2;--shiki-dark:#82AAFF"> null</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">) {</span></span>
+<span class="line"><span style="--shiki-light:#1976D2;--shiki-dark:#C5E478">        next</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">.</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">support</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D9F5DD">(</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">trouble</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D9F5DD">)</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    } </span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">else</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> {</span></span>
+<span class="line"><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">        fail</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D9F5DD">(</span><span style="--shiki-light:#6F42C1;--shiki-dark:#82AAFF">trouble</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D9F5DD">)</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    }</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">}</span></span></code></pre>
+</li>
+<li>
+<p>迭代</p>
+<pre class="astro-code astro-code-themes min-light night-owl" style="--shiki-light:#24292eff;--shiki-dark:#d6deeb;--shiki-light-bg:#ffffff;--shiki-dark-bg:#011627; overflow-x: auto;--file-name-offset: -0.75rem;" tabindex="0" data-language="java"><code><span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">public</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA"> void</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic"> support</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D9F5DD">(</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">Trouble</span><span style="--shiki-light:#6F42C1;--shiki-dark:#82AAFF"> trouble</span><span style="--shiki-light:#6F42C1;--shiki-dark:#D9F5DD">)</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> {</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">    for</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> (</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">Support</span><span style="--shiki-light:#24292EFF;--shiki-dark:#C5E478"> obj</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA"> =</span><span style="--shiki-light:#1976D2;--shiki-dark:#7FDBCA"> this</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">; </span><span style="--shiki-light:#1976D2;--shiki-dark:#82AAFF">true</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">; obj </span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA">=</span><span style="--shiki-light:#1976D2;--shiki-dark:#C5E478"> obj</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">.</span><span style="--shiki-light:#1976D2;--shiki-light-font-style:inherit;--shiki-dark:#FAF39F;--shiki-dark-font-style:italic">next</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">) {</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">        if</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> (</span><span style="--shiki-light:#1976D2;--shiki-dark:#C5E478">obj</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">.</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">resolve</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D9F5DD">(</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">trouble</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D9F5DD">)</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">) {</span></span>
+<span class="line"><span style="--shiki-light:#1976D2;--shiki-dark:#C5E478">            obj</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">.</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">done</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D9F5DD">(</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">trouble</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D9F5DD">)</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">            break</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">        } </span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">else</span><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic"> if</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB"> (</span><span style="--shiki-light:#1976D2;--shiki-dark:#C5E478">obj</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">.</span><span style="--shiki-light:#1976D2;--shiki-light-font-style:inherit;--shiki-dark:#FAF39F;--shiki-dark-font-style:italic">next</span><span style="--shiki-light:#D32F2F;--shiki-dark:#C792EA"> ==</span><span style="--shiki-light:#1976D2;--shiki-dark:#82AAFF"> null</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">) {</span></span>
+<span class="line"><span style="--shiki-light:#1976D2;--shiki-dark:#C5E478">            obj</span><span style="--shiki-light:#212121;--shiki-dark:#D6DEEB">.</span><span style="--shiki-light:#6F42C1;--shiki-light-font-style:inherit;--shiki-dark:#82AAFF;--shiki-dark-font-style:italic">fail</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D9F5DD">(</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">trouble</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D9F5DD">)</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="--shiki-light:#D32F2F;--shiki-light-font-style:inherit;--shiki-dark:#C792EA;--shiki-dark-font-style:italic">            break</span><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">;</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">        }</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">    }</span></span>
+<span class="line"><span style="--shiki-light:#24292EFF;--shiki-dark:#D6DEEB">}</span></span></code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="外观模式-facade">外观模式-Facade</h3>
+<h4 id="核心思想-7">核心思想</h4>
+<p>一些软件随着时间推移，功能越来越多。使用时需要了解许多依赖关系、构建顺序、调用顺序等细节。外观模式就是为了解决这个问题的。</p>
+<p>对外暴露一个公开易用的接口（API），来使用一些封装好的库、功能。简化组件库、功能库的使用方式。</p>
+<p>举例：北极星 SDK 中的 UmsAgent，神策 SDK 中的 SharedSensorsDataAPI。</p>
+<h4 id="结构-13">结构</h4>
+<h5 id="基本结构-8">基本结构</h5>
+<p><img alt="image-20241229231234065" loading="lazy" decoding="async" width="983" height="618" src="/_astro/202412292312150.DPKaV9qi_Z1OXkxL.webp" srcset=""></p>
+<h5 id="示例结构-8">示例结构</h5>
+<p><img alt="image-20241229231251503" loading="lazy" decoding="async" width="967" height="617" src="/_astro/202412292312583.CbgyK_NG_Z1sJK0J.webp" srcset=""></p>
+<h3 id="仲裁者中介者模式-mediator">仲裁者/中介者模式-Mediator</h3>
+<h4 id="核心思想-8">核心思想</h4>
+<p>将各个分散的对象、逻辑交互，进行收拢，统一交由 Mediator 处理。避免分散带来的灾难。</p>
+<h4 id="结构-14">结构</h4>
+<h5 id="基本结构-9">基本结构</h5>
+<p><img alt="image-20250101130459976" loading="lazy" decoding="async" width="956" height="787" src="/_astro/image-20250101130459976.UL0ZnXZe_1dPCs7.webp" srcset=""></p>
+<h5 id="示例结构-9">示例结构</h5>
+<p><img alt="image-20241231210312558" loading="lazy" decoding="async" width="1008" height="640" src="/_astro/image-20241231210312558.B5E8B4-l_ZqbIxi.webp" srcset=""></p>
+<h4 id="解读">解读</h4>
+<p>书中举的例子与 Android 中开发页面的场景是一致的，一个页面中存在多个控件，每个控件的状态可能相互影响。</p>
+<p>但 Android 中可能并不会使用该方式，而是通过设置一些状态监听，在页面中对这些控件进行统一的状态管理。因为我们不想再单独编写自定义的 View 控件和 Colleague 接口，如果每次如此会存在类膨胀的问题。</p>
+<p><img alt="image-20250108233737972" loading="lazy" decoding="async" width="967" height="1093" src="/_astro/202501082337062.C_fmH7-t_19nnHu.webp" srcset=""></p>
+<h3 id="观察者模式-observer">观察者模式-Observer</h3>
+<h4 id="核心思想-9">核心思想</h4>
+<p>示例：</p>
+<ul>
+<li>自定义的各种 Listener 接口，可以使用 lambda 表达式进行使用。</li>
+<li>Android 中的 LiveData</li>
+</ul>
+<h4 id="结构-15">结构</h4>
+<h5 id="基本结构-10">基本结构</h5>
+<p><img alt="image-20241231201334747" loading="lazy" decoding="async" width="965" height="503" src="/_astro/image-20241231201334747.BRpVtaOr_1RNx7K.webp" srcset=""></p>
+<h5 id="示例结构-10">示例结构</h5>
+<p><img alt="image-20241231201140666" loading="lazy" decoding="async" width="961" height="496" src="/_astro/image-20241231201140666.Bs4bhpJx_12a8xt.webp" srcset=""></p>
+<h3 id="备忘录模式-memento">备忘录模式-Memento</h3>
+<h4 id="结构-16">结构</h4>
+<h5 id="基本结构-11">基本结构</h5>
+<p><img alt="image-20250113232310500" loading="lazy" decoding="async" width="907" height="639" src="/_astro/202501132323576.BQ_Jmbyv_1E0WSk.webp" srcset=""></p>
+<h5 id="示例结构-11">示例结构</h5>
+<p><img alt="image-20250108235818723" loading="lazy" decoding="async" width="946" height="645" src="/_astro/202501082358796.BkGAd8D1_A6i7y.webp" srcset=""></p>
+<h4 id="拓展点-4">拓展点</h4>
+<ul>
+<li>
+<p>Memento 有两类接口（API）</p>
+<ul>
+<li>
+<p>wide interface：宽接口，宽指的是功能上更多，能获取、操作 Memento 对象的更多状态。一般 Originator 可访问宽接口。</p>
+</li>
+<li>
+<p>narrow interface：窄接口，窄指的是功能上更少，能获取、操作 Memento 对象的有限。一般 Caretaker 可访问窄接口，不可访问宽接口。</p>
+</li>
+</ul>
+<p>通过设置宽接口与窄接口，我们限制 Caretaker 对 Memento 的访问，可以减小对 Memento 进行修改的影响面。</p>
+</li>
+<li>
+<p>Memento 模式的核心思想在于单一职责和封装。</p>
+</li>
+<li>
+<p>优缺点</p>
+<p><img alt="image-20250113235700882" loading="lazy" decoding="async" width="613" height="648" src="/_astro/202501132357959.Bx-r7gLw_Z2tiLwR.webp" srcset=""></p>
+</li>
+<li>
+<p>可通过数据压缩、计算状态间差值的方式减小内存/磁盘的占用</p>
+</li>
+</ul>
+<h3 id="状态模式-state">状态模式-State</h3>
+<h4 id="核心思想-10">核心思想</h4>
+<ul>
+<li>利用多态特性，替代 if-else 代码</li>
+<li>分而治之，将大问题分解为各个小问题处理（分散到子类中）</li>
+<li>类似于策略模式</li>
+</ul>
+<p>应用场景：播放器状态控制</p>
+<p><img alt="image-20250119204015001" loading="lazy" decoding="async" width="589" height="473" src="/_astro/202501192040087.DRp-1UwH_gsaUg.webp" srcset=""></p>
+<h4 id="结构-17">结构</h4>
+<h5 id="基本结构-12">基本结构</h5>
+<p><img alt="image-20250119180242511" loading="lazy" decoding="async" width="954" height="724" src="/_astro/202501191802586.BR1U5cUP_Z1nUOfn.webp" srcset=""></p>
+<h5 id="示例结构-12">示例结构</h5>
+<p><img alt="image-20250119175041707" loading="lazy" decoding="async" width="949" height="962" src="/_astro/202501191750827.C6Yfs4_1_110thE.webp" srcset=""></p>
+<h4 id="拓展点-5">拓展点</h4>
+<ul>
+<li>我理解此处示例中的 State 类，可以通过 enum 枚举类来实现，更加方便、易维护，且天然为单例。而对于需要创建多个对象的情况，可以使用 Kotlin 中的 sealed 类</li>
+<li><img alt="image-20250119183201856" loading="lazy" decoding="async" width="1006" height="265" src="/_astro/202501191832935.CIjiFzFL_1A07v2.webp" srcset=""></li>
+<li><img alt="image-20250119204151927" loading="lazy" decoding="async" width="558" height="198" src="/_astro/202501192041988.BfA6mPBb_2j4yg.webp" srcset=""></li>
+</ul>
+<h3 id="享元模式-flyweight">享元模式-Flyweight</h3>
+<h4 id="核心思想-11">核心思想</h4>
+<p>Flyweight 意为轻量级。当重复创建某些重量级对象，会大大占用内存。享元模式的思想就是缓存并复用已有的重量级对象，达到减轻内存负担的作用。</p>
+<p>典型应用：</p>
+<ul>
+<li>池化技术。线程池、连接池。</li>
+</ul>
+<h4 id="结构-18">结构</h4>
+<h5 id="基本结构-13">基本结构</h5>
+<p><img alt="image-20250119185149961" loading="lazy" decoding="async" width="956" height="711" src="/_astro/202501191851041.D2SOJO6Z_1Q3pOv.webp" srcset=""></p>
+<h5 id="示例结构-13">示例结构</h5>
+<p><img alt="image-20250119184433989" loading="lazy" decoding="async" width="861" height="843" src="/_astro/202501191844072.DPgogKcZ_Z1MMRi2.webp" srcset=""></p>
+<h4 id="拓展点-6">拓展点</h4>
+<ul>
+<li>当需要使用享元模式时，需要考虑共享对象的修改会对多个地方产生影响。</li>
+<li>固有信息与非固有信息
+<img alt="image-20250119190505118" loading="lazy" decoding="async" width="988" height="492" src="/_astro/202501191905200.DMuQgYJv_Z2gGOi1.webp" srcset=""></li>
+</ul>
+<h3 id="代理模式-proxy">代理模式-Proxy</h3>
+<h4 id="结构-19">结构</h4>
+<h5 id="基本结构-14">基本结构</h5>
+<p><img alt="image-20241229232037322" loading="lazy" decoding="async" width="990" height="396" src="/_astro/202412292320399.ibGrwr9N_Z6qQ3K.webp" srcset=""></p>
+<h5 id="示例结构-14">示例结构</h5>
+<p><img alt="image-20241229232103411" loading="lazy" decoding="async" width="950" height="412" src="/_astro/202412292321492.CaFLE_hh_2lX9A1.webp" srcset=""></p>
+<h4 id="拓展点-7">拓展点</h4>
+<p><img alt="image-20250108232951526" loading="lazy" decoding="async" width="1009" height="493" src="/_astro/202501082329611.BnMRL-dw_Z2tNpje.webp" srcset=""></p>
+<p><img alt="image-20241229232513570" loading="lazy" decoding="async" width="972" height="172" src="/_astro/202412292325640.BHzGvkXn_3rlAk.webp" srcset=""></p>
+<h3 id="命令模式-command">命令模式-Command</h3>
+<h4 id="结构-20">结构</h4>
+<h5 id="基本结构-15">基本结构</h5>
+<p><img alt="image-20250119192849780" loading="lazy" decoding="async" width="990" height="565" src="/_astro/202501191928844.BR_7Ikj3_A9OjO.webp" srcset=""></p>
+<p><img alt="image-20250119202354542" loading="lazy" decoding="async" width="986" height="586" src="/_astro/202501192023618.CCSfQDgm_1KpEFO.webp" srcset=""></p>
+<h5 id="示例结构-15">示例结构</h5>
+<p><img alt="image-20250119191742840" loading="lazy" decoding="async" width="993" height="712" src="/_astro/202501191917919.BuC9Yn3t_2ikCT6.webp" srcset=""></p>
+<h3 id="解释器模式-interpreter">解释器模式-Interpreter</h3>
+<h4 id="结构-21">结构</h4>
+<h5 id="基本结构-16">基本结构</h5>
+<p><img alt="image-20250119212559801" loading="lazy" decoding="async" width="986" height="559" src="/_astro/202501192125896.DekdxgER_oI8SY.webp" srcset=""></p>
+<h5 id="示例结构-16">示例结构</h5>
+<p><img alt="image-20250119212845591" loading="lazy" decoding="async" width="991" height="565" src="/_astro/202501192128667.BFWeBbxZ_sdDRU.webp" srcset=""></p>
+<h5 id="拓展点-8">拓展点</h5>
+<p><img alt="image-20250119212923828" loading="lazy" decoding="async" width="1005" height="746" src="/_astro/202501192129954.CMeKa8Z1_Z1QjPTT.webp" srcset=""></p> </article> <hr class="my-8 border-dashed"> <a href="https://github.com/Figt-Gonz/Figt-Gonz.github.io/edit/main/src/content/posts/design-patterns-notes.md" target="_blank" rel="noopener noreferrer" class="hover:text-accent text-muted-foreground flex justify-baseline gap-1.5 sm:hidden"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="inline-block" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z" /><path d="M7 7H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0-2.97-2.97L9 12v3h3zM16 5l3 3" /></svg><span>编辑页面</span></a> <div id="btt-btn-container" class="fixed inset-e-4 bottom-8 z-50 md:sticky md:inset-e-auto md:float-end md:me-1 translate-y-14 opacity-0 transition duration-500"> <button data-button="back-to-top" class="group bg-background relative px-2 py-1 size-14 rounded-full shadow-xl md:h-8 md:w-fit md:rounded-md md:shadow-none md:focus-visible:rounded-none md:bg-background/35 md:bg-clip-padding md:backdrop-blur-lg"> <span id="progress-indicator" class="absolute inset-0 -z-10 block size-14 scale-110 rounded-full bg-transparent md:hidden md:h-8 md:rounded-md"></span> <svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="inline-block rotate-90 md:hidden" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z" /><path d="M5 12h14M5 12l6 6M5 12l6-6" /></svg> <span class="group-hover:text-accent sr-only text-sm md:not-sr-only"> <svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="inline-block size-4" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z" /><path d="M12 5v14M16 9l-4-4M8 9l4-4" /></svg> 回到顶部 </span> </button> </div> <script data-astro-rerun>
+  function backToTop() {
+    const rootElement = document.documentElement;
+    const btnContainer = document.querySelector("#btt-btn-container");
+    const backToTopBtn = document.querySelector("[data-button='back-to-top']");
+    const progressIndicator = document.querySelector("#progress-indicator");
+
+    if (!rootElement || !btnContainer || !backToTopBtn || !progressIndicator)
+      return;
+
+    backToTopBtn.addEventListener("click", () => {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    });
+
+    let lastVisible = null;
+    function handleScroll() {
+      const scrollTotal = rootElement.scrollHeight - rootElement.clientHeight;
+      const scrollTop = rootElement.scrollTop;
+      const scrollPercent = Math.floor((scrollTop / scrollTotal) * 100);
+
+      progressIndicator.style.setProperty(
+        "background-image",
+        `conic-gradient(var(--accent), var(--accent) ${scrollPercent}%, transparent ${scrollPercent}%)`
+      );
+
+      const isVisible = scrollTop / scrollTotal > 0.3;
+
+      if (isVisible !== lastVisible) {
+        btnContainer.classList.toggle("opacity-100", isVisible);
+        btnContainer.classList.toggle("translate-y-0", isVisible);
+        btnContainer.classList.toggle("opacity-0", !isVisible);
+        btnContainer.classList.toggle("translate-y-14", !isVisible);
+        lastVisible = isVisible;
+      }
+    }
+
+    let ticking = false;
+    document.addEventListener("scroll", () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+  }
+  backToTop();
+</script> <ul class="mt-4 mb-8 flex flex-wrap gap-4 sm:my-8"> <li> <a href="/tags/设计模式/" class="flex items-center gap-0.5 border-foreground border-b-2 border-dashed hover:border-accent hover:text-accent hover:-mt-0.5 focus-visible:text-accent focus-visible:border-none text-sm" data-astro-transition-scope="astro-36ssibgs-1"> <svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="opacity-80 size-4" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z" /><path d="M5 9h14M5 15h14M11 4 7 20M17 4l-4 16" /></svg> 设计模式 </a> </li><li> <a href="/tags/java/" class="flex items-center gap-0.5 border-foreground border-b-2 border-dashed hover:border-accent hover:text-accent hover:-mt-0.5 focus-visible:text-accent focus-visible:border-none text-sm" data-astro-transition-scope="astro-36ssibgs-2"> <svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="opacity-80 size-4" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z" /><path d="M5 9h14M5 15h14M11 4 7 20M17 4l-4 16" /></svg> Java </a> </li><li> <a href="/tags/面向对象/" class="flex items-center gap-0.5 border-foreground border-b-2 border-dashed hover:border-accent hover:text-accent hover:-mt-0.5 focus-visible:text-accent focus-visible:border-none text-sm" data-astro-transition-scope="astro-36ssibgs-3"> <svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="opacity-80 size-4" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z" /><path d="M5 9h14M5 15h14M11 4 7 20M17 4l-4 16" /></svg> 面向对象 </a> </li> </ul> <div class="flex flex-none flex-col items-center justify-center gap-1 md:items-start"><span class="italic">分享这篇文章：</span><div class="text-center"><a href="https://wa.me/?text=https://figt-gonz.github.io/posts/design-patterns-notes/" title="分享到 Whatsapp" target="_blank" rel="noopener noreferrer" class="group inline-flex items-center gap-1 hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1"> <svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z" /><path d="m3 21 1.65-3.8a9 9 0 1 1 3.4 2.9z" /><path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0za5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1" /></svg><span class="sr-only">分享到 Whatsapp</span> </a><a href="https://www.facebook.com/sharer.php?u=https://figt-gonz.github.io/posts/design-patterns-notes/" title="分享到 Facebook" target="_blank" rel="noopener noreferrer" class="group inline-flex items-center gap-1 hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1"> <svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z" /><path d="M7 10v4h3v7h4v-7h3l1-4h-4V8a1 1 0 0 1 1-1h3V3h-3a5 5 0 0 0-5 5v2z" /></svg><span class="sr-only">分享到 Facebook</span> </a><a href="https://x.com/intent/post?url=https://figt-gonz.github.io/posts/design-patterns-notes/" title="分享到 X" target="_blank" rel="noopener noreferrer" class="group inline-flex items-center gap-1 hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1"> <svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z" /><path d="m4 4 11.733 16H20L8.267 4zM4 20l6.768-6.768m2.46-2.46L20 4" /></svg><span class="sr-only">分享到 X</span> </a><a href="https://t.me/share/url?url=https://figt-gonz.github.io/posts/design-patterns-notes/" title="分享到 Telegram" target="_blank" rel="noopener noreferrer" class="group inline-flex items-center gap-1 hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1"> <svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z" /><path d="m15 10-4 4 6 6 4-16-18 7 4 2 2 6 3-4" /></svg><span class="sr-only">分享到 Telegram</span> </a><a href="https://pinterest.com/pin/create/button/?url=https://figt-gonz.github.io/posts/design-patterns-notes/" title="分享到 Pinterest" target="_blank" rel="noopener noreferrer" class="group inline-flex items-center gap-1 hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1"> <svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z" /><path d="m8 20 4-9M10.7 14c.437 1.263 1.43 2 2.55 2 2.071 0 3.75-1.554 3.75-4a5 5 0 1 0-9.7 1.7" /><path d="M3 12a9 9 0 1 0 18 0 9 9 0 1 0-18 0" /></svg><span class="sr-only">分享到 Pinterest</span> </a><a href="mailto:?subject=See%20this%20post&amp;body=https://figt-gonz.github.io/posts/design-patterns-notes/" title="通过邮件分享" target="_blank" rel="noopener noreferrer" class="group inline-flex items-center gap-1 hover:text-accent scale-90 p-2 hover:rotate-6 sm:p-1"> <svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z" /><path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><path d="m3 7 9 6 9-6" /></svg><span class="sr-only">通过邮件分享</span> </a></div></div> <hr class="my-8 border-dashed"> <div data-pagefind-ignore class="my-8 grid grid-cols-1 gap-6 sm:grid-cols-2"> <a href="/posts/first-post/" class="flex w-full gap-1 hover:opacity-75"> <svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="inline-block flex-none rtl:rotate-180" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z" /><path d="M5 12h14M5 12l6 6M5 12l6-6" /></svg> <div> <span>上一篇</span> <div class="text-accent/85 text-sm">Welcome</div> </div> </a> <a href="/posts/harmonyos-first-look/" class="flex w-full justify-end gap-1 text-end hover:opacity-75 sm:col-start-2"> <div> <span>下一篇</span> <div class="text-accent/85 text-sm">鸿蒙初探：HarmonyOS 关键特性与 ArkTS 开发入门</div> </div> <svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="inline-block flex-none rtl:rotate-180" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z" /><path d="M5 12h14M13 18l6-6M13 6l6 6" /></svg> </a> </div> </main> <aside aria-label="文章目录" class="hidden xl:fixed xl:top-24 xl:left-[calc(50%+25rem)] xl:block xl:max-h-[calc(100vh-7rem)] xl:w-56 xl:overflow-y-auto 2xl:left-[calc(50%+27rem)]" data-post-toc> <nav class="text-sm"> <h2 class="text-muted-foreground mb-3 text-xs font-semibold tracking-wide">
+目录
+</h2> <ol class="border-border space-y-2 border-s ps-4"> <li class="ms-3"> <a href="#学习思路" class="toc-link text-muted-foreground hover:text-accent focus-visible:text-accent block leading-relaxed no-underline transition-colors"> 学习思路 </a> </li><li class="ms-3"> <a href="#基本概念" class="toc-link text-muted-foreground hover:text-accent focus-visible:text-accent block leading-relaxed no-underline transition-colors"> 基本概念 </a> </li><li class="ms-6"> <a href="#面向对象" class="toc-link text-muted-foreground hover:text-accent focus-visible:text-accent block leading-relaxed no-underline transition-colors"> 面向对象 </a> </li><li class="ms-6"> <a href="#uml-类图" class="toc-link text-muted-foreground hover:text-accent focus-visible:text-accent block leading-relaxed no-underline transition-colors"> UML 类图 </a> </li><li class="ms-3"> <a href="#设计原则" class="toc-link text-muted-foreground hover:text-accent focus-visible:text-accent block leading-relaxed no-underline transition-colors"> 设计原则 </a> </li><li class="ms-6"> <a href="#单一职责原则-s" class="toc-link text-muted-foreground hover:text-accent focus-visible:text-accent block leading-relaxed no-underline transition-colors"> 单一职责原则 S </a> </li><li class="ms-6"> <a href="#开放-封闭原则-o" class="toc-link text-muted-foreground hover:text-accent focus-visible:text-accent block leading-relaxed no-underline transition-colors"> 开放-封闭原则 O </a> </li><li class="ms-6"> <a href="#依赖倒置原则-d" class="toc-link text-muted-foreground hover:text-accent focus-visible:text-accent block leading-relaxed no-underline transition-colors"> 依赖倒置原则 D </a> </li><li class="ms-6"> <a href="#接口隔离原则-i" class="toc-link text-muted-foreground hover:text-accent focus-visible:text-accent block leading-relaxed no-underline transition-colors"> 接口隔离原则 I </a> </li><li class="ms-3"> <a href="#设计模式内容" class="toc-link text-muted-foreground hover:text-accent focus-visible:text-accent block leading-relaxed no-underline transition-colors"> 设计模式内容 </a> </li><li class="ms-6"> <a href="#设计模式的分类" class="toc-link text-muted-foreground hover:text-accent focus-visible:text-accent block leading-relaxed no-underline transition-colors"> 设计模式的分类 </a> </li><li class="ms-6"> <a href="#简单工厂模式" class="toc-link text-muted-foreground hover:text-accent focus-visible:text-accent block leading-relaxed no-underline transition-colors"> 简单工厂模式 </a> </li><li class="ms-6"> <a href="#策略模式" class="toc-link text-muted-foreground hover:text-accent focus-visible:text-accent block leading-relaxed no-underline transition-colors"> 策略模式 </a> </li><li class="ms-6"> <a href="#装饰模式" class="toc-link text-muted-foreground hover:text-accent focus-visible:text-accent block leading-relaxed no-underline transition-colors"> 装饰模式 </a> </li><li class="ms-6"> <a href="#观察者模式与发布订阅模式" class="toc-link text-muted-foreground hover:text-accent focus-visible:text-accent block leading-relaxed no-underline transition-colors"> 观察者模式与发布订阅模式 </a> </li><li class="ms-6"> <a href="#迭代器模式-itorator" class="toc-link text-muted-foreground hover:text-accent focus-visible:text-accent block leading-relaxed no-underline transition-colors"> 迭代器模式-Itorator </a> </li><li class="ms-6"> <a href="#适配器模式-adapter" class="toc-link text-muted-foreground hover:text-accent focus-visible:text-accent block leading-relaxed no-underline transition-colors"> 适配器模式-Adapter </a> </li><li class="ms-6"> <a href="#模板方法模式-template-method" class="toc-link text-muted-foreground hover:text-accent focus-visible:text-accent block leading-relaxed no-underline transition-colors"> 模板方法模式-Template Method </a> </li><li class="ms-6"> <a href="#工厂方法模式-factory-method" class="toc-link text-muted-foreground hover:text-accent focus-visible:text-accent block leading-relaxed no-underline transition-colors"> 工厂方法模式-Factory Method </a> </li><li class="ms-6"> <a href="#单例模式-singleton" class="toc-link text-muted-foreground hover:text-accent focus-visible:text-accent block leading-relaxed no-underline transition-colors"> 单例模式-Singleton </a> </li><li class="ms-6"> <a href="#原型模式-prototype" class="toc-link text-muted-foreground hover:text-accent focus-visible:text-accent block leading-relaxed no-underline transition-colors"> 原型模式-Prototype </a> </li><li class="ms-6"> <a href="#建造者模式-builder" class="toc-link text-muted-foreground hover:text-accent focus-visible:text-accent block leading-relaxed no-underline transition-colors"> 建造者模式-Builder </a> </li><li class="ms-6"> <a href="#抽象工厂模式-abstract-factory" class="toc-link text-muted-foreground hover:text-accent focus-visible:text-accent block leading-relaxed no-underline transition-colors"> 抽象工厂模式-Abstract Factory </a> </li><li class="ms-6"> <a href="#桥接模式-bridge" class="toc-link text-muted-foreground hover:text-accent focus-visible:text-accent block leading-relaxed no-underline transition-colors"> 桥接模式-Bridge </a> </li><li class="ms-6"> <a href="#策略模式-strategy" class="toc-link text-muted-foreground hover:text-accent focus-visible:text-accent block leading-relaxed no-underline transition-colors"> 策略模式-Strategy </a> </li><li class="ms-6"> <a href="#组合模式-composite" class="toc-link text-muted-foreground hover:text-accent focus-visible:text-accent block leading-relaxed no-underline transition-colors"> 组合模式-Composite </a> </li><li class="ms-6"> <a href="#访问者模式-visitor" class="toc-link text-muted-foreground hover:text-accent focus-visible:text-accent block leading-relaxed no-underline transition-colors"> 访问者模式-Visitor </a> </li><li class="ms-6"> <a href="#装饰模式-decorator" class="toc-link text-muted-foreground hover:text-accent focus-visible:text-accent block leading-relaxed no-underline transition-colors"> 装饰模式-Decorator </a> </li><li class="ms-6"> <a href="#责任链模式-chain-of-responsibility" class="toc-link text-muted-foreground hover:text-accent focus-visible:text-accent block leading-relaxed no-underline transition-colors"> 责任链模式-Chain Of Responsibility </a> </li><li class="ms-6"> <a href="#外观模式-facade" class="toc-link text-muted-foreground hover:text-accent focus-visible:text-accent block leading-relaxed no-underline transition-colors"> 外观模式-Facade </a> </li><li class="ms-6"> <a href="#仲裁者中介者模式-mediator" class="toc-link text-muted-foreground hover:text-accent focus-visible:text-accent block leading-relaxed no-underline transition-colors"> 仲裁者/中介者模式-Mediator </a> </li><li class="ms-6"> <a href="#观察者模式-observer" class="toc-link text-muted-foreground hover:text-accent focus-visible:text-accent block leading-relaxed no-underline transition-colors"> 观察者模式-Observer </a> </li><li class="ms-6"> <a href="#备忘录模式-memento" class="toc-link text-muted-foreground hover:text-accent focus-visible:text-accent block leading-relaxed no-underline transition-colors"> 备忘录模式-Memento </a> </li><li class="ms-6"> <a href="#状态模式-state" class="toc-link text-muted-foreground hover:text-accent focus-visible:text-accent block leading-relaxed no-underline transition-colors"> 状态模式-State </a> </li><li class="ms-6"> <a href="#享元模式-flyweight" class="toc-link text-muted-foreground hover:text-accent focus-visible:text-accent block leading-relaxed no-underline transition-colors"> 享元模式-Flyweight </a> </li><li class="ms-6"> <a href="#代理模式-proxy" class="toc-link text-muted-foreground hover:text-accent focus-visible:text-accent block leading-relaxed no-underline transition-colors"> 代理模式-Proxy </a> </li><li class="ms-6"> <a href="#命令模式-command" class="toc-link text-muted-foreground hover:text-accent focus-visible:text-accent block leading-relaxed no-underline transition-colors"> 命令模式-Command </a> </li><li class="ms-6"> <a href="#解释器模式-interpreter" class="toc-link text-muted-foreground hover:text-accent focus-visible:text-accent block leading-relaxed no-underline transition-colors"> 解释器模式-Interpreter </a> </li> </ol> </nav> </aside> </div> <footer class="app-layout mt-auto"> <div class="border-border flex flex-col items-center justify-between border-t py-6 sm:flex-row-reverse sm:py-4"> <div class="flex flex-wrap items-center gap-1"> <a href="https://github.com/Figt-Gonz" title="心游的技术博客 on Github" class="group inline-flex items-center gap-1 hover:text-accent p-2 hover:rotate-6 sm:p-1">  <svg width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z" /><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21" /></svg> <span class="sr-only">心游的技术博客 on Github</span>  </a> </div> <div class="my-2 flex flex-col items-center whitespace-nowrap sm:flex-row"> <span>版权所有 &#169; 2026</span> <span class="hidden sm:inline">&nbsp;|&nbsp;</span> <span>保留所有权利。</span> </div> </div> </footer>   <script type="module">const c="theme",r="light",o="dark";function l(e){return e===r||e===o}function d(){const e=localStorage.getItem(c);return l(e)?e:(e!==null&&localStorage.removeItem(c),window.matchMedia("(prefers-color-scheme: dark)").matches?o:r)}const s=window.__theme?.value;let t=l(s)?s:d();function h(){localStorage.setItem(c,t),i()}function i(){const e=document.firstElementChild;e?.setAttribute("data-theme",t),e?.classList.toggle("dark",t===o),document.querySelector("#theme-btn")?.setAttribute("aria-label",t);const n=window.getComputedStyle(document.body).backgroundColor;document.querySelector("meta[name='theme-color']")?.setAttribute("content",n)}function u(){i(),document.querySelector("#theme-btn")?.addEventListener("click",()=>{t=t===r?o:r,h()})}u();document.addEventListener("astro:after-swap",u);document.addEventListener("astro:before-swap",e=>{const n=e.newDocument,a=n.firstElementChild;a?.setAttribute("data-theme",t),a?.classList.toggle("dark",t===o);const m=document.querySelector("meta[name='theme-color']")?.getAttribute("content");m&&n.querySelector("meta[name='theme-color']")?.setAttribute("content",m)});</script> </body> </html> <script data-astro-rerun>
+  function createProgressBar() {
+    const progressContainer = document.createElement("div");
+    progressContainer.className =
+      "progress-container fixed top-0 z-10 h-1 w-full bg-background";
+
+    const progressBar = document.createElement("div");
+    progressBar.className = "progress-bar h-1 w-0 bg-accent";
+    progressBar.id = "myBar";
+
+    progressContainer.appendChild(progressBar);
+    document.body.appendChild(progressContainer);
+  }
+  createProgressBar();
+
+  function updateScrollProgress() {
+    document.addEventListener("scroll", () => {
+      const winScroll =
+        document.body.scrollTop || document.documentElement.scrollTop;
+      const height =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      if (document) {
+        const myBar = document.getElementById("myBar");
+        if (myBar) {
+          myBar.style.width = scrolled + "%";
+        }
+      }
+    });
+  }
+  updateScrollProgress();
+
+  function addHeadingLinks() {
+    const headings = Array.from(
+      document.querySelectorAll(
+        "#article h2, #article h3, #article h4, #article h5, #article h6"
+      )
+    );
+    for (const heading of headings) {
+      heading.classList.add("group");
+      const link = document.createElement("a");
+      link.className =
+        "heading-link ms-2 no-underline opacity-75 md:opacity-0 md:group-hover:opacity-100 md:focus:opacity-100";
+      link.href = "#" + heading.id;
+
+      const span = document.createElement("span");
+      span.ariaHidden = "true";
+      span.innerText = "#";
+      link.appendChild(span);
+      heading.appendChild(link);
+    }
+  }
+  addHeadingLinks();
+
+  function attachCopyButtons() {
+    const copyButtonLabel = "Copy";
+    const codeBlocks = Array.from(document.querySelectorAll("pre"));
+
+    for (const codeBlock of codeBlocks) {
+      const wrapper = document.createElement("div");
+      wrapper.style.position = "relative";
+
+      const computedStyle = getComputedStyle(codeBlock);
+      const hasFileNameOffset =
+        computedStyle.getPropertyValue("--file-name-offset").trim() !== "";
+
+      const topClass = hasFileNameOffset
+        ? "top-(--file-name-offset)"
+        : "-top-3";
+
+      const copyButton = document.createElement("button");
+      copyButton.className = `copy-code absolute end-3 ${topClass} rounded bg-muted border border-muted px-2 py-1 text-xs leading-4 text-foreground font-medium`;
+      copyButton.innerHTML = copyButtonLabel;
+      codeBlock.setAttribute("tabindex", "0");
+      codeBlock.appendChild(copyButton);
+
+      codeBlock?.parentNode?.insertBefore(wrapper, codeBlock);
+      wrapper.appendChild(codeBlock);
+
+      copyButton.addEventListener("click", async () => {
+        await copyCode(codeBlock, copyButton);
+      });
+    }
+
+    async function copyCode(block, button) {
+      const code = block.querySelector("code");
+      const text = code?.innerText;
+
+      await navigator.clipboard.writeText(text ?? "");
+
+      button.innerText = "Copied";
+
+      setTimeout(() => {
+        button.innerText = copyButtonLabel;
+      }, 700);
+    }
+  }
+  attachCopyButtons();
+
+  /** Accessible image lightbox for article images. */
+  function initLightbox() {
+    const article = document.getElementById("article");
+    if (!article) return;
+
+    const prefersReducedMotion = () =>
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    let overlay = null;
+    let lastFocused = null;
+
+    // Defer attribute mutations so they don't push the LCP timestamp.
+    // Event listeners below use delegation and don't need the attributes to exist yet.
+    requestAnimationFrame(() => {
+      const images = Array.from(article.querySelectorAll("img"));
+      for (const image of images) {
+        if (image.closest("a")) continue;
+        image.setAttribute("role", "button");
+        image.setAttribute("tabindex", "0");
+        image.setAttribute("aria-haspopup", "dialog");
+        image.setAttribute(
+          "aria-label",
+          image.alt ? `Zoom image: ${image.alt}` : "Zoom image"
+        );
+      }
+    });
+
+    function open(src, alt, trigger) {
+      if (overlay) return;
+      lastFocused = trigger ?? document.activeElement;
+
+      overlay = document.createElement("div");
+      overlay.setAttribute("role", "dialog");
+      overlay.setAttribute("aria-modal", "true");
+      overlay.setAttribute(
+        "aria-label",
+        alt ? `Image preview: ${alt}` : "Image preview"
+      );
+      overlay.className =
+        "fixed inset-0 z-50 flex cursor-zoom-out items-center justify-center bg-black/70 backdrop-blur-sm opacity-0 transition-opacity duration-200 motion-reduce:transition-none";
+
+      const closeButton = document.createElement("button");
+      closeButton.type = "button";
+      closeButton.setAttribute("aria-label", "Close image preview");
+      closeButton.className =
+        "absolute end-4 top-4 rounded p-2 text-3xl leading-none text-white";
+      closeButton.innerHTML = "&#10005;";
+      closeButton.addEventListener("click", close);
+
+      const image = document.createElement("img");
+      image.src = src;
+      image.alt = "";
+      image.className =
+        "max-h-[90dvh] max-w-[90dvw] cursor-default object-contain";
+
+      overlay.append(closeButton, image);
+      overlay.addEventListener("click", e => {
+        if (e.target === overlay && currentScale <= 1) close();
+      });
+
+      let currentScale = 1;
+      let translateX = 0;
+      let translateY = 0;
+      let initialDist = 0;
+      let initialScale = 1;
+      let panStartX = 0;
+      let panStartY = 0;
+      let panStartTranslateX = 0;
+      let panStartTranslateY = 0;
+      let lastTapTime = 0;
+
+      function applyTransform() {
+        image.style.transform = `scale(${currentScale}) translate(${translateX}px, ${translateY}px)`;
+      }
+
+      function resetTransform() {
+        currentScale = 1;
+        translateX = 0;
+        translateY = 0;
+        image.style.transform = "";
+      }
+
+      overlay.addEventListener(
+        "touchstart",
+        e => {
+          const t = e.touches;
+          if (t.length === 2) {
+            initialDist = Math.hypot(
+              t[1].clientX - t[0].clientX,
+              t[1].clientY - t[0].clientY
+            );
+            initialScale = currentScale;
+          } else if (t.length === 1) {
+            const now = Date.now();
+            if (now - lastTapTime < 300) {
+              e.preventDefault();
+              if (currentScale > 1) {
+                resetTransform();
+              } else {
+                currentScale = 2;
+                translateX = 0;
+                translateY = 0;
+                applyTransform();
+              }
+              lastTapTime = 0;
+              panStartX = t[0].clientX;
+              panStartY = t[0].clientY;
+              panStartTranslateX = translateX;
+              panStartTranslateY = translateY;
+            } else {
+              lastTapTime = now;
+              if (currentScale > 1) {
+                panStartX = t[0].clientX;
+                panStartY = t[0].clientY;
+                panStartTranslateX = translateX;
+                panStartTranslateY = translateY;
+              }
+            }
+          }
+        },
+        { passive: false }
+      );
+
+      overlay.addEventListener(
+        "touchmove",
+        e => {
+          const t = e.touches;
+          if (t.length === 2) {
+            e.preventDefault();
+            const dist = Math.hypot(
+              t[1].clientX - t[0].clientX,
+              t[1].clientY - t[0].clientY
+            );
+            currentScale = Math.min(
+              4,
+              Math.max(1, initialScale * (dist / initialDist))
+            );
+            applyTransform();
+          } else if (t.length === 1) {
+            if (currentScale > 1) {
+              e.preventDefault();
+              translateX =
+                panStartTranslateX + (t[0].clientX - panStartX) / currentScale;
+              translateY =
+                panStartTranslateY + (t[0].clientY - panStartY) / currentScale;
+              const maxX = Math.max(
+                0,
+                (image.clientWidth - overlay.clientWidth / currentScale) / 2
+              );
+              const maxY = Math.max(
+                0,
+                (image.clientHeight - overlay.clientHeight / currentScale) / 2
+              );
+              translateX = Math.min(maxX, Math.max(-maxX, translateX));
+              translateY = Math.min(maxY, Math.max(-maxY, translateY));
+              applyTransform();
+            } else {
+              e.preventDefault();
+            }
+          }
+        },
+        { passive: false }
+      );
+
+      overlay.addEventListener("touchend", e => {
+        if (e.touches.length === 0 && currentScale <= 1.05) {
+          resetTransform();
+        }
+      });
+
+      overlay.addEventListener("touchcancel", e => {
+        if (e.touches.length === 0 && currentScale <= 1.05) {
+          resetTransform();
+        }
+      });
+
+      document.body.appendChild(overlay);
+      document.body.style.overflow = "hidden";
+      document.addEventListener("keydown", onKeyDown);
+      window.__closeLightbox = close;
+
+      requestAnimationFrame(() => overlay?.classList.add("opacity-100"));
+      closeButton.focus();
+    }
+
+    function close() {
+      if (!overlay) return;
+      const el = overlay;
+      overlay = null;
+      window.__closeLightbox = null;
+
+      document.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = "";
+      lastFocused?.focus();
+      lastFocused = null;
+
+      if (prefersReducedMotion()) {
+        el.remove();
+        return;
+      }
+      const remove = () => el.remove();
+      el.addEventListener("transitionend", remove, { once: true });
+      setTimeout(remove, 250); // fallback in case transitionend never fires
+      el.classList.remove("opacity-100");
+    }
+
+    function onKeyDown(e) {
+      if (e.key === "Escape") {
+        close();
+      } else if (e.key === "Tab") {
+        trapFocus(e);
+      }
+    }
+
+    // Keep keyboard focus inside the open dialog.
+    function trapFocus(e) {
+      if (!overlay) return;
+      const focusables = overlay.querySelectorAll(
+        'a[href], button, [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+
+    function triggerFromEvent(e) {
+      const image = e.target.closest("img");
+      if (!image || !article.contains(image) || image.closest("a")) return null;
+      return image;
+    }
+
+    function activate(image) {
+      open(image.currentSrc || image.src, image.alt, image);
+    }
+
+    article.addEventListener("click", e => {
+      const image = triggerFromEvent(e);
+      if (!image) return;
+      e.preventDefault();
+      activate(image);
+    });
+
+    article.addEventListener("keydown", e => {
+      if (e.key !== "Enter" && e.key !== " " && e.key !== "Spacebar") return;
+      const image = triggerFromEvent(e);
+      if (!image) return;
+      e.preventDefault();
+      activate(image);
+    });
+  }
+  initLightbox();
+
+  if (!window.__lightboxSwapBound) {
+    window.__lightboxSwapBound = true;
+    document.addEventListener("astro:before-swap", () =>
+      window.__closeLightbox?.()
+    );
+  }
+
+  document.addEventListener("astro:after-swap", () =>
+    window.scrollTo({ left: 0, top: 0, behavior: "instant" })
+  );
+</script>
