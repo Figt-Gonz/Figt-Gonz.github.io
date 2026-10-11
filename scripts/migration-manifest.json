@@ -1,0 +1,194 @@
+{
+  "vault_root": "/var/lib/syncthing/personal-vault/40.知识沉淀",
+  "asset_pools": [
+    "/var/lib/syncthing/personal-vault/_assets/legacy/personal-summary"
+  ],
+  "note": "每篇的 pubDatetime 留空 = 等待老板指定日期；intro = 迁移时补写的开篇引言（正文不改）。",
+  "entries": [
+    {
+      "slug": "maven-gradle-dependency-system",
+      "src": "技术/Maven 与 Gradle 依赖体系.md",
+      "title": "Maven 与 Gradle 依赖体系梳理",
+      "description": "从 Maven 仓库结构、产物清单、发布链路到 Gradle classpath 与 POM scope 的映射关系，理清 Android 依赖管理背后的机制与常见坑。",
+      "intro": "Android 工程里依赖问题往往最难排查：没改代码却编译不过、打包时多出无关库、SDK 发布后集成方拿不到传递依赖。这篇笔记把 Maven 仓库结构、产物清单、发布链路，与 Gradle 的 api/implementation 声明、两种 classpath、POM scope 之间的对应关系串起来讲清楚，最后列出常见坑与排查方向。整理自一次关于依赖体系的讨论，属于通用 Android/Gradle 工程知识。",
+      "tags": [
+        "Gradle",
+        "Maven",
+        "Android",
+        "依赖管理"
+      ],
+      "pubDatetime": "2026-07-08T21:41:00+08:00",
+      "enabled": true
+    },
+    {
+      "slug": "design-patterns-notes",
+      "src": "技术/Design Pattern/设计模式.md",
+      "title": "设计模式学习笔记：从设计原则到 23 种模式",
+      "description": "按设计原则、UML 类图到具体模式的顺序整理设计模式学习笔记，包含简单工厂、策略、装饰、观察者、单例、建造者等模式的意图与实现要点。",
+      "intro": "设计模式背成 23 个名词不难，难的是判断什么场景该用哪个。这篇笔记从面向对象和设计原则讲起，再按顺序整理简单工厂、策略、装饰、观察者、迭代器、适配器、模板方法、工厂方法、单例、原型、建造者、抽象工厂、桥接等模式的意图、结构与实现要点，每个模式都配了类图或示意图。可以当速查手册翻，也适合跟着顺序过一遍。",
+      "tags": [
+        "设计模式",
+        "Java",
+        "面向对象"
+      ],
+      "pubDatetime": "2025-05-17T21:41:00+08:00",
+      "enabled": true
+    },
+    {
+      "slug": "data-structures-and-algorithms",
+      "src": "技术/算法/数据结构 & 算法.md",
+      "title": "数据结构与算法笔记：从线性表到算法题解",
+      "description": "整理排序稳定性、表达式转换、哈希冲突等细碎知识点，并按线性表、非线性表、查找、排序的框架梳理数据结构与算法题解思路。",
+      "intro": "这篇笔记分两部分。前半部分是容易忘的细碎知识点：排序算法的稳定性、中缀/前缀/后缀表达式转换、哈希冲突的处理方式等。后半部分按线性表、非线性表、查找、排序的框架，结合《大话数据结构》和刷题题解整理思路。写下来主要是为了把「看得懂」变成「写得出」，所以保留了个人题解过程与心得体会。",
+      "tags": [
+        "算法",
+        "数据结构",
+        "笔记"
+      ],
+      "pubDatetime": "2023-09-09T21:07:00+08:00",
+      "enabled": true
+    },
+    {
+      "slug": "java-generics-annotations-datetime",
+      "src": "技术/Java/Java 知识体系总结.md",
+      "title": "Java 知识体系总结：泛型、注解与日期类",
+      "description": "梳理 Java 泛型限定符与通配符、泛型擦除、静态代理与动态代理、注解机制以及 Date/Calendar/LocalDateTime 日期类的使用与差异。",
+      "intro": "",
+      "tags": [
+        "Java",
+        "泛型",
+        "注解",
+        "笔记"
+      ],
+      "pubDatetime": "",
+      "enabled": false
+    },
+    {
+      "slug": "android-view-system",
+      "src": "技术/Android/Android 知识体系总结.md",
+      "title": "Android 知识体系总结：View 体系与事件分发",
+      "description": "梳理 Android 坐标系、View 的滑动、事件分发机制与自定义 View 相关知识，并记录 RxJava 等三方库的实践要点。",
+      "intro": "",
+      "tags": [
+        "Android",
+        "View",
+        "自定义View",
+        "事件分发"
+      ],
+      "pubDatetime": "",
+      "enabled": false
+    },
+    {
+      "slug": "harmonyos-first-look",
+      "src": "技术/HarmonyOS/鸿蒙初探.md",
+      "title": "鸿蒙初探：HarmonyOS 关键特性与 ArkTS 开发入门",
+      "description": "记录 HarmonyOS 一次开发多端部署的核心特性、Stage 模型工程结构、ArkTS 语言特性与 ArkUI 声明式 UI 范式的入门要点。",
+      "intro": "接触鸿蒙时记下的第一份笔记。从 HarmonyOS「一次开发、多端部署」的核心特性讲起，记录 Stage 模型下的工程结构（AppScope、module.json5 等配置分别放在哪里）、ArkTS 的语言特性与特殊语法，以及 ArkUI 声明式 UI 的基本写法。适合从 Android 转过来时对照理解。",
+      "tags": [
+        "HarmonyOS",
+        "鸿蒙",
+        "ArkTS",
+        "ArkUI"
+      ],
+      "pubDatetime": "2025-03-28T20:41:00+08:00",
+      "enabled": true
+    },
+    {
+      "slug": "https-tls-handshake",
+      "src": "技术/HTTPS.md",
+      "title": "HTTPS 与 TLS 握手流程梳理",
+      "description": "从对称与非对称加密讲起，梳理 HTTPS 建立连接时的 TLS 握手流程，说明证书与密钥交换如何保证传输安全。",
+      "intro": "HTTP 明文传输意味着链路上任何一环都能看到内容，HTTPS 靠的就是 TLS 握手协商出一把只有双方知道的密钥。这篇笔记从对称加密与非对称加密讲起，按步骤梳理 TLS 握手过程，说明证书和密钥交换各自解决了什么问题。属于网络基础里最值得动手画一遍的部分。",
+      "tags": [
+        "网络",
+        "HTTPS",
+        "TLS"
+      ],
+      "pubDatetime": "2023-10-15T21:07:00+08:00",
+      "enabled": true
+    },
+    {
+      "slug": "git-notes",
+      "src": "技术/Git.md",
+      "title": "Git 常用命令与核心概念整理",
+      "description": "整理 Git 常用命令、版本回退与分支操作，以及工作区、暂存区、版本库等核心概念的理解方式。",
+      "intro": "整理自己常用的 Git 命令和核心概念：工作区、暂存区、版本库的关系，提交与回退（reset、reflog）、分支与远程操作等，也记了一些容易记混的命令参数。偏速查性质，遇到记不清的命令可以直接翻。",
+      "tags": [
+        "Git",
+        "工具",
+        "笔记"
+      ],
+      "pubDatetime": "2023-08-26T20:41:00+08:00",
+      "enabled": true
+    },
+    {
+      "slug": "kotlin-coroutines",
+      "src": "技术/Android/Kotlin 协程.md",
+      "title": "Kotlin 协程学习笔记：核心概念与异常处理",
+      "description": "整理 Kotlin 协程的挂起函数、CoroutineScope、CoroutineContext 等核心概念，以及结构化并发与异常处理中的常见问题。",
+      "intro": "Kotlin 协程的学习笔记，整理挂起函数、CoroutineScope、CoroutineContext、结构化并发与异常处理这些核心概念，以及同步、异步写法上的取舍。内容还在持续补充，目前记录的是已经想清楚的部分和几个仍在验证的问题。",
+      "tags": [
+        "Kotlin",
+        "协程",
+        "Android"
+      ],
+      "pubDatetime": "2025-03-04T20:23:00+08:00",
+      "drop_sections": [
+        "TODO"
+      ],
+      "enabled": true
+    },
+    {
+      "slug": "clean-code-reading-notes",
+      "src": "阅读笔记/技术/《代码整洁之道 Clean Code》.md",
+      "title": "《代码整洁之道》读书笔记",
+      "description": "按章节整理《代码整洁之道》中关于命名、函数、注释、错误处理、单元测试与类的核心观点与实践建议。",
+      "intro": "",
+      "tags": [
+        "读书笔记",
+        "代码规范"
+      ],
+      "pubDatetime": "",
+      "enabled": false
+    },
+    {
+      "slug": "effective-java-reading-notes",
+      "src": "阅读笔记/技术/《Effective Java》.md",
+      "title": "《Effective Java》读书笔记",
+      "description": "整理《Effective Java》中创建和销毁对象相关条目，包含静态工厂方法、构建器等实践建议与个人理解。",
+      "intro": "",
+      "tags": [
+        "读书笔记",
+        "Java"
+      ],
+      "pubDatetime": "",
+      "enabled": false
+    },
+    {
+      "slug": "core-java-volume-1-reading-notes",
+      "src": "阅读笔记/技术/《Java 核心技术卷 I》.md",
+      "title": "《Java 核心技术卷 I》读书笔记",
+      "description": "按章节整理《Java 核心技术卷 I》中基本程序设计结构、对象与类、继承、接口与 Lambda、并发等核心内容。",
+      "intro": "",
+      "tags": [
+        "读书笔记",
+        "Java"
+      ],
+      "pubDatetime": "",
+      "enabled": false
+    },
+    {
+      "slug": "computer-networks-reading-notes",
+      "src": "阅读笔记/技术/《计算机网络》.md",
+      "title": "《计算机网络》读书笔记",
+      "description": "按自底向上的顺序整理《计算机网络》中物理层、数据链路层、应用层与网络安全等章节的核心概念与模型。",
+      "intro": "",
+      "tags": [
+        "读书笔记",
+        "网络"
+      ],
+      "pubDatetime": "",
+      "enabled": false
+    }
+  ]
+}

@@ -31,3 +31,7 @@ public/pagefind
 
 # docker compose
 compose.override.yaml
+
+# 迁移临时产物
+.staging-migration/
+tmp/
