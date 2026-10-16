@@ -105,16 +105,8 @@ Kotlin 协程的学习笔记，整理挂起函数、CoroutineScope、CoroutineCo
 
 - [异步JavaScript 简介- 学习Web 开发| MDN](https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/Asynchronous/Introducing)
 
-## 零散的理解
-
-### 协程的意义
-
-看了一些文章下来，我理解协程的特点/优势有如下几个：
+## 协程的意义
 
 1. **很好地支持结构化并发。**方便对并发任务进行统一的管理（通过协程作用域），减少内存泄漏风险和维护成本
 2. **方便地进行线程切换。**可以方便地将不同的任务安排到合适的线程中
 3. 支持**以同步的方式来编写异步代码**（通过挂起/恢复），避免了“回调地狱”，代码可读性上大大提高了
-
-## 问题
-
-1. CoroutineScope 与 CoroutineContext 是分离的，为什么呢？
