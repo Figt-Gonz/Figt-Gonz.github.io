@@ -1,5 +1,5 @@
 ---
-title: "Kotlin 协程学习笔记：核心概念与异常处理"
+title: "Kotlin 协程小记：核心概念与异常处理"
 description: "整理 Kotlin 协程的挂起函数、CoroutineScope、CoroutineContext 等核心概念，以及结构化并发与异常处理中的常见问题。"
 pubDatetime: 2025-03-04T20:23:00+08:00
 featured: false
