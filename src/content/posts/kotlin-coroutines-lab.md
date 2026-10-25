@@ -1,7 +1,8 @@
 ---
 title: "协程实验室：交互式理解 Kotlin 协程"
-description: "用可交互的时间轴、状态机和任务树，直观理解 Kotlin 协程的挂起、调度、并发与取消。"
+description: "通过可交互实验理解 Kotlin 协程的挂起恢复、状态机、调度器、结构化并发、取消、async 与 Flow。"
 pubDatetime: 2026-10-25T23:56:41+08:00
+modDatetime: 2026-10-26T00:09:04+08:00
 featured: false
 draft: false
 tags:
@@ -10,7 +11,7 @@ tags:
   - 协程
 ---
 
-这是一份可交互的 Kotlin 协程学习指南。从挂起与线程的关系出发，通过状态机、调度器、并发任务、结构化并发和取消实验，逐步理解协程的运行机制。页面为单文件 HTML，可离线打开。
+这是一份可交互的 Kotlin 协程学习指南，通过实验探索挂起与恢复、状态机、调度器、结构化并发、协作式取消、async 与 Flow。页面为单文件 HTML，可离线打开。
 
 <a href="/labs/kotlin-coroutines-lab.html" target="_blank" rel="noopener noreferrer">在新标签页中单独打开协程实验室</a>
 
