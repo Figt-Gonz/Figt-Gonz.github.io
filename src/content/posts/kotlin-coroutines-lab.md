@@ -2,8 +2,8 @@
 title: "协程实验室：交互式理解 Kotlin 协程"
 description: "通过可交互实验理解 Kotlin 协程的挂起恢复、状态机、调度器、结构化并发、取消、async 与 Flow。"
 pubDatetime: 2026-10-25T23:56:41+08:00
-modDatetime: 2026-10-26T00:09:04+08:00
-featured: false
+modDatetime: 2026-10-26T00:12:08+08:00
+featured: true
 draft: false
 tags:
   - Kotlin
