@@ -148,8 +148,8 @@
         "读书笔记",
         "代码规范"
       ],
-      "pubDatetime": "",
-      "enabled": false
+      "pubDatetime": "2025-10-11T23:07:00+08:00",
+      "enabled": true
     },
     {
       "slug": "effective-java-reading-notes",
